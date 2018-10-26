@@ -208,6 +208,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -216,6 +218,14 @@
     <Compile Include="Migrations\201810261302209_initialMigration.cs" />
     <Compile Include="Migrations\201810261302209_initialMigration.Designer.cs">
       <DependentUpon>201810261302209_initialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810261845087_addedCustomerAndEmployee.cs" />
+    <Compile Include="Migrations\201810261845087_addedCustomerAndEmployee.Designer.cs">
+      <DependentUpon>201810261845087_addedCustomerAndEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810262054325_updated.cs" />
+    <Compile Include="Migrations\201810262054325_updated.Designer.cs">
+      <DependentUpon>201810262054325_updated.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -283,6 +293,18 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_CustomerLayout.cshtml" />
+    <Content Include="Views\Shared\_EmployeeLayout.cshtml" />
+    <Content Include="Views\Customers\Create.cshtml" />
+    <Content Include="Views\Customers\Delete.cshtml" />
+    <Content Include="Views\Customers\Details.cshtml" />
+    <Content Include="Views\Customers\Edit.cshtml" />
+    <Content Include="Views\Customers\Index.cshtml" />
+    <Content Include="Views\Employees\Create.cshtml" />
+    <Content Include="Views\Employees\Delete.cshtml" />
+    <Content Include="Views\Employees\Details.cshtml" />
+    <Content Include="Views\Employees\Edit.cshtml" />
+    <Content Include="Views\Employees\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -303,6 +325,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201810261302209_initialMigration.resx">
       <DependentUpon>201810261302209_initialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810261845087_addedCustomerAndEmployee.resx">
+      <DependentUpon>201810261845087_addedCustomerAndEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810262054325_updated.resx">
+      <DependentUpon>201810262054325_updated.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

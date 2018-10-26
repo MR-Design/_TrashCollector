@@ -18,13 +18,17 @@ namespace _TrashCollector_DCC.Models
 
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
-        // Here where I link the regestration Table with the Customer Table
-        [ForeignKey("Employee Info")]
-        [Display(Name = " Employee Info")]
-        public int EmployeeID { get; set; }
-        public Employee Employees { get; set; }
+        [ForeignKey("ApplicationUser")]
+        public string ApplicationUserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+        public IEnumerable<ApplicationUser> ApplicationUsers { get; set; }
 
-        //end here
-        public IEnumerable<Employee> employee { get; set; }
+
+
+        //// Here where I link the regestration Table with the Customer Table
+        //[ForeignKey("Employee Info")]
+        //[Display(Name = " Employee Info")]
+        //public int EmployeeID { get; set; }
+        //public Employee Employees { get; set; }
     }
 }

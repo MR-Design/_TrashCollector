@@ -79,8 +79,7 @@ namespace _TrashCollector_DCC.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-        // here where I link to my Models
-        public string FirstName { get; set; }
+       
 
     }
 

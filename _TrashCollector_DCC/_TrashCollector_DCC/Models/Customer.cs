@@ -13,10 +13,10 @@ namespace _TrashCollector_DCC.Models
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "First Name")]
+        //[Display(Name = "First Name")]
         public string FirstName { get; set; }
 
-        [Display(Name = "Last Name")]
+        //[Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         [Required]
@@ -25,15 +25,10 @@ namespace _TrashCollector_DCC.Models
         [Required]
         [DisplayName("Enter 5 Digit Please")]
         public string ZipCode { get; set; }
-
-
-        // Here where I link the regestration Table with the Customer Table
-        [ForeignKey("Customer Info")]
-        [Display(Name = " Customer Info")]
-        public int CustomerID { get; set; }
-        public Customer customers { get; set; }
-
-        //end here
-        public IEnumerable<Customer> customer { get; set; }
+      
+        [ForeignKey("ApplicationUser")]
+        public string ApplicationUserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+        public IEnumerable<ApplicationUser> ApplicationUsers { get; set; }
     }
 }
