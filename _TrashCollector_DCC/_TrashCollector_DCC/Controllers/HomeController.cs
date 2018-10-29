@@ -10,6 +10,7 @@ namespace _TrashCollector_DCC.Controllers
     {
         public ActionResult Index()
         {
+
             return View();
         }
 

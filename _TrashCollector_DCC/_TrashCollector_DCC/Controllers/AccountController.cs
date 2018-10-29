@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using _TrashCollector_DCC.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace _TrashCollector_DCC.Controllers
 {
@@ -77,6 +78,7 @@ namespace _TrashCollector_DCC.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
+            
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -151,7 +153,7 @@ namespace _TrashCollector_DCC.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
+            ViewBag.Name = new SelectList(context.Roles.Select(u => u)
                                             .ToList(), "Name", "Name");
             return View();
         }
@@ -179,7 +181,15 @@ namespace _TrashCollector_DCC.Controllers
                     //Assign Role to user Here      
                     await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
                     //Ends Here    
-                    return RedirectToAction("Index", "Users");
+                    if (model.UserRoles == "Customer")
+                    {
+                        return RedirectToAction("Index", "Customers");
+                    }
+                    else if (model.UserRoles == "Employee")
+                    {
+                        return RedirectToAction("Create", "Employees");
+                    }
+
                 }
                 ViewBag.Name = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
                                           .ToList(), "Name", "Name");
