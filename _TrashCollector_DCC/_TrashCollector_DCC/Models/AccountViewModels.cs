@@ -49,9 +49,9 @@ namespace _TrashCollector_DCC.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "UserName")]
+
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -64,6 +64,10 @@ namespace _TrashCollector_DCC.Models
 
     public class RegisterViewModel
     {
+        [Required]
+        [Display(Name = "UserRoles")]
+        public string UserRoles { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -79,8 +83,7 @@ namespace _TrashCollector_DCC.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
-       
-
+        public string UserName { get; internal set; }
     }
 
     public class ResetPasswordViewModel

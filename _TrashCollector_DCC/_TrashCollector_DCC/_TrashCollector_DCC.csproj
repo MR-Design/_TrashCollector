@@ -212,6 +212,8 @@
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -226,6 +228,14 @@
     <Compile Include="Migrations\201810262054325_updated.cs" />
     <Compile Include="Migrations\201810262054325_updated.Designer.cs">
       <DependentUpon>201810262054325_updated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810271956346_addingRolles.cs" />
+    <Compile Include="Migrations\201810271956346_addingRolles.Designer.cs">
+      <DependentUpon>201810271956346_addingRolles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810291426128_seeding-userRoles.cs" />
+    <Compile Include="Migrations\201810291426128_seeding-userRoles.Designer.cs">
+      <DependentUpon>201810291426128_seeding-userRoles.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -305,6 +315,9 @@
     <Content Include="Views\Employees\Details.cshtml" />
     <Content Include="Views\Employees\Edit.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -331,6 +344,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810262054325_updated.resx">
       <DependentUpon>201810262054325_updated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810271956346_addingRolles.resx">
+      <DependentUpon>201810271956346_addingRolles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810291426128_seeding-userRoles.resx">
+      <DependentUpon>201810291426128_seeding-userRoles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
