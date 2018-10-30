@@ -48,7 +48,7 @@ namespace _TrashCollector_DCC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Address,ZipCode,CustomerID")] Customer customer)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Address,ZipCode")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -58,7 +58,7 @@ namespace _TrashCollector_DCC.Controllers
             }
 
             ViewBag.CustomerID = new SelectList(db.Customers, "Id", "FirstName", customer.Id);
-            return View(customer);
+            return RedirectToAction("Index");
         }
 
         // GET: Customers/Edit/5

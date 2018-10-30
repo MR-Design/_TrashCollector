@@ -64,7 +64,7 @@ namespace _TrashCollector_DCC.Controllers
         //
 
         // GET: /Account/Login
-        [AllowAnonymous]
+        [Authorize]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
@@ -74,7 +74,7 @@ namespace _TrashCollector_DCC.Controllers
         //
         // POST: /Account/Login
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
@@ -183,7 +183,7 @@ namespace _TrashCollector_DCC.Controllers
                     //Ends Here    
                     if (model.UserRoles == "Customer")
                     {
-                        return RedirectToAction("Index", "Customers");
+                        return RedirectToAction("Create", "Customers");
                     }
                     else if (model.UserRoles == "Employee")
                     {
