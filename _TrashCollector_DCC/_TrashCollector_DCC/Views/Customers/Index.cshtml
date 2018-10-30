@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<_TrashCollector_DCC.Models.Customer>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Todays Trash Pickups";
     //Layout = "~/Views/Shared/_CustomerLayout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Todays Trash Pickups</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @*@Html.ActionLink("Create New", "Create")*@
 </p>
 <table class="table">
     <tr>
@@ -48,9 +48,9 @@
             @Html.DisplayFor(modelItem => item.ZipCode)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |*@
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @*@Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
         </td>
     </tr>
 }

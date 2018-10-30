@@ -19,7 +19,18 @@ namespace _TrashCollector_DCC.Controllers
         {
             var employees = db.Employees.ToList();
             return View(employees);
+
+            //var CustomersInEmployee = db.Employees.Include(c => c.ApplicationUsers);
+            //return View(CustomersInEmployee.ToList());
         }
+
+        
+        //public ActionResult Index(Customer customer)
+        //{
+        //    var employees = db.Customers.ToList();
+        //    RedirectToAction("Index");
+        //    return View(customer);
+        //}
 
         // GET: Employees/Details/5
         public ActionResult Details(int? id)

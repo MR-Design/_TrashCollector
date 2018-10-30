@@ -10,7 +10,10 @@ namespace _TrashCollector_DCC.Controllers
     {
         public ActionResult Index()
         {
-
+            if (User.IsInRole("Employee"))
+            {
+               return RedirectToAction("Index", "Customers");
+            }
             return View();
         }
 
