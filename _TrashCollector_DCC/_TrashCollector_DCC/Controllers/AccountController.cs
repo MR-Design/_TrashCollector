@@ -64,7 +64,7 @@ namespace _TrashCollector_DCC.Controllers
         //
 
         // GET: /Account/Login
-        [Authorize]
+        [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
@@ -74,7 +74,7 @@ namespace _TrashCollector_DCC.Controllers
         //
         // POST: /Account/Login
         [HttpPost]
-        [Authorize]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
