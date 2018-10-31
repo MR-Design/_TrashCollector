@@ -365,6 +365,8 @@
     <Content Include="Views\CustomerInfoes\Index.cshtml" />
     <Content Include="Views\CustomerInfoes\CreatePickup.cshtml" />
     <Content Include="Views\CustomerInfoes\NewPickup.cshtml" />
+    <Content Include="Views\CustomerInfoes\EditNewPickup.cshtml" />
+    <Content Include="Views\CustomerInfoes\CreateSusPickups.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
