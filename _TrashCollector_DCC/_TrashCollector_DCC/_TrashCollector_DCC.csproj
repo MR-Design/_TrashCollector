@@ -208,6 +208,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CustomerInfoesController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -264,6 +265,10 @@
     <Compile Include="Migrations\201810302155250_AddingCustomerInfo.cs" />
     <Compile Include="Migrations\201810302155250_AddingCustomerInfo.Designer.cs">
       <DependentUpon>201810302155250_AddingCustomerInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810310044113_CustomerInfoAddedAndUpdateCustomers.cs" />
+    <Compile Include="Migrations\201810310044113_CustomerInfoAddedAndUpdateCustomers.Designer.cs">
+      <DependentUpon>201810310044113_CustomerInfoAddedAndUpdateCustomers.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -349,6 +354,11 @@
     <Content Include="Views\Role\Create.cshtml" />
     <Content Include="Views\Role\Index.cshtml" />
     <Content Include="Views\Customers\Create.cshtml" />
+    <Content Include="Views\CustomerInfoes\Create.cshtml" />
+    <Content Include="Views\CustomerInfoes\Delete.cshtml" />
+    <Content Include="Views\CustomerInfoes\Details.cshtml" />
+    <Content Include="Views\CustomerInfoes\Edit.cshtml" />
+    <Content Include="Views\CustomerInfoes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -402,6 +412,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810302155250_AddingCustomerInfo.resx">
       <DependentUpon>201810302155250_AddingCustomerInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810310044113_CustomerInfoAddedAndUpdateCustomers.resx">
+      <DependentUpon>201810310044113_CustomerInfoAddedAndUpdateCustomers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,0 +1,58 @@
+﻿@model _TrashCollector_DCC.Models.CustomerInfo
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>CustomerInfo</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.WeeklyPickup)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.WeeklyPickup)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.SuspendPickupsStart)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SuspendPickupsStart)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.SuspendPickupsEnd)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.SuspendPickupsEnd)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ExtraPickup)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ExtraPickup)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Money }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

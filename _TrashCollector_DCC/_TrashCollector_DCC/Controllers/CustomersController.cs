@@ -90,9 +90,10 @@ namespace _TrashCollector_DCC.Controllers
         {
             var currentuser = User.Identity.GetUserId();
             Customer customer = db.Customers.Where(s => s.ApplicationUserId == currentuser).SingleOrDefault();
+            var CusomerInfoView = new CustomerViewModel();
 
             //ViewBag.customer.Id = new SelectList(db.Customers, "Id", "FirstName", customer.Id);
-            return View(customer);
+            return View(CusomerInfoView);
         }
 
         [HttpPost]

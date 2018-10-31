@@ -7,6 +7,7 @@ namespace _TrashCollector_DCC.Models
 {
     public class CustomerViewModel
     {
-        public Customer allCustomer  { get; set; }
+        public Customer AllCustomers  { get; set; }
+        public CustomerInfo AllCustomersInfo  { get; set; }
     }
 }
