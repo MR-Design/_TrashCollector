@@ -9,7 +9,11 @@ namespace _TrashCollector_DCC.Models
     public class CustomerInfo
     {
         [Key]
+        public int Id { get; set; }
+
         public double Money { get; set; }
+
+        [Display(Name = "Weekly Pickup")]
         public string WeeklyPickup  { get; set; }
 
         [DataType(DataType.Date)]

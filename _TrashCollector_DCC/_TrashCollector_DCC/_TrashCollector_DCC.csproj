@@ -270,6 +270,10 @@
     <Compile Include="Migrations\201810310044113_CustomerInfoAddedAndUpdateCustomers.Designer.cs">
       <DependentUpon>201810310044113_CustomerInfoAddedAndUpdateCustomers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810311247329_addIDCustInfo.cs" />
+    <Compile Include="Migrations\201810311247329_addIDCustInfo.Designer.cs">
+      <DependentUpon>201810311247329_addIDCustInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -359,6 +363,8 @@
     <Content Include="Views\CustomerInfoes\Details.cshtml" />
     <Content Include="Views\CustomerInfoes\Edit.cshtml" />
     <Content Include="Views\CustomerInfoes\Index.cshtml" />
+    <Content Include="Views\CustomerInfoes\CreatePickup.cshtml" />
+    <Content Include="Views\CustomerInfoes\NewPickup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -415,6 +421,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810310044113_CustomerInfoAddedAndUpdateCustomers.resx">
       <DependentUpon>201810310044113_CustomerInfoAddedAndUpdateCustomers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810311247329_addIDCustInfo.resx">
+      <DependentUpon>201810311247329_addIDCustInfo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

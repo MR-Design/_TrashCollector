@@ -59,7 +59,7 @@ namespace _TrashCollector_DCC.Controllers
             
 
             ViewBag.CustomerID = new SelectList(db.Customers, "Id", "FirstName", customer.Id);
-            return RedirectToAction("Index", "Customers");
+            return RedirectToAction("CreatePickup", "CustomerInfoes");
         }
 
         // GET: Customers/Edit/5
@@ -71,44 +71,57 @@ namespace _TrashCollector_DCC.Controllers
         //             return View(edditing);
         //}
 
-        //[HttpPost]
-        //public ActionResult Edit(int id, FormCollection collection)
-        //{
-
-        //    var edditing = db.Customers.Where(e => e.Id == id).Select(e => e).SingleOrDefault();
-
-
-        //        // Need to change the model to an INT
-        //    edditing.FirstName = collection["FirstName"];
-        //    edditing.LastName = collection["LastName"];
-        //    edditing.Address = collection["Address"];
-        //    edditing.ZipCode = Int32.Parse(collection["ZipCode"]); 
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
-        public ActionResult Edit()
+       
+    public ActionResult Edit()
         {
             var currentuser = User.Identity.GetUserId();
             Customer customer = db.Customers.Where(s => s.ApplicationUserId == currentuser).SingleOrDefault();
-            var CusomerInfoView = new CustomerViewModel();
-
-            //ViewBag.customer.Id = new SelectList(db.Customers, "Id", "FirstName", customer.Id);
-            return View(CusomerInfoView);
+            CustomerInfo info = db.CustomersInfo.Where(i => i.Id == customer.Id).SingleOrDefault();
+            CustomerViewModel viewm = new CustomerViewModel();
+            viewm.AllCustomers = customer;
+            viewm.AllCustomersInfo = info;
+                //ViewBag.customer.Id = new SelectList(db.Customers, "Id", "FirstName", customer.Id);
+            return View(viewm);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Address,ZipCode,CustomerID")] Customer customer)
+        public ActionResult Edit(int id, FormCollection collection)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(customer).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.customer.Id = new SelectList(db.Customers, "Id", "FirstName", customer.Id);
-            return View(customer);
+
+            //var edditing = db.Customers.Where(e => e.Id == id).Include(e => e.ApplicationUser).SingleOrDefault();
+
+            CustomerInfo CustInfo = db.CustomersInfo.Where(i => i.Id == id).SingleOrDefault();
+            Customer Cust = db.Customers.Where(i => i.Id == id).SingleOrDefault();
+
+
+            // Need to change the model to an INT
+            Cust.FirstName = collection["AllCustomers.FirstName"];
+            Cust.LastName = collection["AllCustomers.LastName"];
+            Cust.Address = collection["AllCustomers.Address"];
+            Cust.City = collection["AllCustomers.City"];
+            Cust.State = collection["AllCustomers.State"];
+            Cust.ZipCode = Int32.Parse(collection["AllCustomers.ZipCode"]);
+            CustInfo.WeeklyPickup = collection["AllCustomersInfo.WeeklyPickup"];
+
+            db.SaveChanges();
+            return View();
+            //return RedirectToAction("Index");
         }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Address,ZipCode,CustomerID")] Customer customer)
+        //{
+
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(customer).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.customer.Id = new SelectList(db.Customers, "Id", "FirstName", customer.Id);
+        //    return View(customer);
+        //}
 
         // GET: Customers/Delete/5
         public ActionResult Delete(int? id)

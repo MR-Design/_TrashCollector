@@ -34,9 +34,34 @@ namespace _TrashCollector_DCC.Controllers
             }
             return View(customerInfo);
         }
+        // NewPickup
+        public ActionResult NewPickup()
+        {
+            return View();
+        }
 
-        // GET: CustomerInfoes/Create
-        public ActionResult Create()
+
+
+        
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult NewPickup([Bind(Include = "Money,WeeklyPickup,SuspendPickupsStart,SuspendPickupsEnd,ExtraPickup")] CustomerInfo customerInfo)
+        {
+            if (ModelState.IsValid)
+            {
+                db.CustomersInfo.Add(customerInfo);
+                db.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+
+            return RedirectToAction("Index", "Home");
+            //    return View(customerInfo);
+        }
+
+
+        // GET: CustomerInfoes/Create      
+        public ActionResult CreatePickup()
         {
             return View();
         }
@@ -46,16 +71,17 @@ namespace _TrashCollector_DCC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Money,WeeklyPickup,SuspendPickupsStart,SuspendPickupsEnd,ExtraPickup")] CustomerInfo customerInfo)
+        public ActionResult CreatePickup([Bind(Include = "Money,WeeklyPickup,SuspendPickupsStart,SuspendPickupsEnd,ExtraPickup")] CustomerInfo customerInfo)
         {
             if (ModelState.IsValid)
             {
                 db.CustomersInfo.Add(customerInfo);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit", "Customers");
             }
 
-            return View(customerInfo);
+            return RedirectToAction("Edit", "Customers");
+            //    return View(customerInfo);
         }
 
         // GET: CustomerInfoes/Edit/5
