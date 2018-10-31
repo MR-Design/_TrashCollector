@@ -25,6 +25,12 @@
             @Html.DisplayNameFor(model => model.Address)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.ZipCode)
         </th>
         <th></th>
@@ -48,8 +54,12 @@
             @Html.DisplayFor(modelItem => item.ZipCode)
         </td>
         <td>
-            @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |*@
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) 
+
+            <input type="checkbox" name="" value=""> Mark as Done<br>
+
+
+            @*@Html.ActionLink("Details", "Details", new { id = item.Id })*@ 
             @*@Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
         </td>
     </tr>

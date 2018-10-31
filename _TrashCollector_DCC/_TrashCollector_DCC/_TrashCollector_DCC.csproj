@@ -249,9 +249,27 @@
     <Compile Include="Migrations\201810292011455_test.Designer.cs">
       <DependentUpon>201810292011455_test.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810301922575_AddedCityStateToEmployeeAndCustomers.cs" />
+    <Compile Include="Migrations\201810301922575_AddedCityStateToEmployeeAndCustomers.Designer.cs">
+      <DependentUpon>201810301922575_AddedCityStateToEmployeeAndCustomers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810302008219_DeleteTheUserValidations.cs" />
+    <Compile Include="Migrations\201810302008219_DeleteTheUserValidations.Designer.cs">
+      <DependentUpon>201810302008219_DeleteTheUserValidations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810302144268_newViewModel.cs" />
+    <Compile Include="Migrations\201810302144268_newViewModel.Designer.cs">
+      <DependentUpon>201810302144268_newViewModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810302155250_AddingCustomerInfo.cs" />
+    <Compile Include="Migrations\201810302155250_AddingCustomerInfo.Designer.cs">
+      <DependentUpon>201810302155250_AddingCustomerInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\CustomerInfo.cs" />
+    <Compile Include="Models\CustomerViewModel.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -372,6 +390,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810292011455_test.resx">
       <DependentUpon>201810292011455_test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810301922575_AddedCityStateToEmployeeAndCustomers.resx">
+      <DependentUpon>201810301922575_AddedCityStateToEmployeeAndCustomers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810302008219_DeleteTheUserValidations.resx">
+      <DependentUpon>201810302008219_DeleteTheUserValidations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810302144268_newViewModel.resx">
+      <DependentUpon>201810302144268_newViewModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810302155250_AddingCustomerInfo.resx">
+      <DependentUpon>201810302155250_AddingCustomerInfo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

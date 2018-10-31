@@ -39,6 +39,7 @@ namespace _TrashCollector_DCC.Models
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<CustomerInfo> CustomersInfo { get; set; }
 
 
 

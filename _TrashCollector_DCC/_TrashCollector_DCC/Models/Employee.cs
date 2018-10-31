@@ -18,6 +18,16 @@ namespace _TrashCollector_DCC.Models
 
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+
+        [DisplayName("Address Line 1")]
+        public string Address { get; set; }
+
+        public string City { get; set; }
+
+        public string State { get; set; }
+
+        [DisplayName("Zip Code")]
+        public int ZipCode { get; set; }
         [ForeignKey("ApplicationUser")]
         public string ApplicationUserId { get; set; }
         public ApplicationUser ApplicationUser { get; set; }

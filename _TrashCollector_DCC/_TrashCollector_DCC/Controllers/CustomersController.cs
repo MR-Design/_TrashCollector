@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using _TrashCollector_DCC.Models;
+using Microsoft.AspNet.Identity;
 
 namespace _TrashCollector_DCC.Controllers
 {
@@ -50,36 +51,50 @@ namespace _TrashCollector_DCC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Address,ZipCode")] Customer customer)
         {
-            if (ModelState.IsValid)
-            {
+            var currentCustomer = User.Identity.GetUserId();
+            customer.ApplicationUserId = currentCustomer;
+            
                 db.Customers.Add(customer);
                 db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+            
 
             ViewBag.CustomerID = new SelectList(db.Customers, "Id", "FirstName", customer.Id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Customers");
         }
 
         // GET: Customers/Edit/5
-        public ActionResult Edit(int? id)
+
+        //public ActionResult Edit(int id)
+        //{
+        //    var edditing = db.Customers.Where(e => e.Id == id).Select(e => e).SingleOrDefault();
+
+        //             return View(edditing);
+        //}
+
+        //[HttpPost]
+        //public ActionResult Edit(int id, FormCollection collection)
+        //{
+
+        //    var edditing = db.Customers.Where(e => e.Id == id).Select(e => e).SingleOrDefault();
+
+
+        //        // Need to change the model to an INT
+        //    edditing.FirstName = collection["FirstName"];
+        //    edditing.LastName = collection["LastName"];
+        //    edditing.Address = collection["Address"];
+        //    edditing.ZipCode = Int32.Parse(collection["ZipCode"]); 
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
+        public ActionResult Edit()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.CustomerID = new SelectList(db.Customers, "Id", "FirstName", customer.Id);
+            var currentuser = User.Identity.GetUserId();
+            Customer customer = db.Customers.Where(s => s.ApplicationUserId == currentuser).SingleOrDefault();
+
+            //ViewBag.customer.Id = new SelectList(db.Customers, "Id", "FirstName", customer.Id);
             return View(customer);
         }
 
-        // POST: Customers/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Address,ZipCode,CustomerID")] Customer customer)
@@ -90,7 +105,7 @@ namespace _TrashCollector_DCC.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CustomerID = new SelectList(db.Customers, "Id", "FirstName", customer.Id);
+            ViewBag.customer.Id = new SelectList(db.Customers, "Id", "FirstName", customer.Id);
             return View(customer);
         }
 
