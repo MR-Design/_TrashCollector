@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -12,6 +13,13 @@ namespace _TrashCollector_DCC.Models
         public int Id { get; set; }
 
         public double Money { get; set; }
+
+       
+
+        [ForeignKey("Customer")]
+        public int CustomerInfoID { get; set; }
+        public Customer Customer { get; set; }
+
 
         [Display(Name = "Weekly Pickup")]
         public string WeeklyPickup  { get; set; }

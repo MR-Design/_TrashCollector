@@ -49,7 +49,7 @@ namespace _TrashCollector_DCC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Address,ZipCode")] Customer customer)
+        public ActionResult Create( Customer customer)
         {
             var currentCustomer = User.Identity.GetUserId();
             customer.ApplicationUserId = currentCustomer;
@@ -58,9 +58,13 @@ namespace _TrashCollector_DCC.Controllers
                 db.SaveChanges();
             
 
-            ViewBag.CustomerID = new SelectList(db.Customers, "Id", "FirstName", customer.Id);
+            //ViewBag.CustomerID = new SelectList(db.Customers, "Id", "FirstName", customer.Id);
             return RedirectToAction("CreatePickup", "CustomerInfoes");
         }
+
+        // GET: Customers/Create
+        
+
 
         // GET: Customers/Edit/5
 
@@ -71,8 +75,8 @@ namespace _TrashCollector_DCC.Controllers
         //             return View(edditing);
         //}
 
-       
-    public ActionResult Edit()
+
+        public ActionResult Edit()
         {
             var currentuser = User.Identity.GetUserId();
             Customer customer = db.Customers.Where(s => s.ApplicationUserId == currentuser).SingleOrDefault();

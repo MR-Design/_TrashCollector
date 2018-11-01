@@ -32,9 +32,13 @@ namespace _TrashCollector_DCC.Models
         [DisplayName("Zip Code")]
         public int  ZipCode { get; set; }
 
+
+
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> RegistrationDate { get; set; }
+
+
 
         [ForeignKey("ApplicationUser")]
         public string ApplicationUserId { get; set; }

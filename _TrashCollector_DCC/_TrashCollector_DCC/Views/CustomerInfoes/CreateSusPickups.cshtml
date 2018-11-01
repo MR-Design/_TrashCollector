@@ -1,35 +1,25 @@
 ﻿@model _TrashCollector_DCC.Models.CustomerInfo
-
 @{
     Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+    ViewBag.Title = "ChosePickUp";
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Edit</title>
+    <title>Take Break</title>
 </head>
 <body>
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        
+
         <div class="form-horizontal">
-            <h4>CustomerInfo</h4>
+            <h3>When are you Planing to take a break</h3>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.Money)
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.WeeklyPickup, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.WeeklyPickup, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.WeeklyPickup, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
+
             <div class="form-group">
                 @Html.LabelFor(model => model.SuspendPickupsStart, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -37,7 +27,7 @@
                     @Html.ValidationMessageFor(model => model.SuspendPickupsStart, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
+            <hr />
             <div class="form-group">
                 @Html.LabelFor(model => model.SuspendPickupsEnd, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -45,25 +35,17 @@
                     @Html.ValidationMessageFor(model => model.SuspendPickupsEnd, "", new { @class = "text-danger" })
                 </div>
             </div>
-    
-            <div class="form-group">
-                @Html.LabelFor(model => model.ExtraPickup, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.ExtraPickup, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.ExtraPickup, "", new { @class = "text-danger" })
-                </div>
-            </div>
-    
+
+
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
+                    <input type="submit" value="Send Request" class="btn-danger btn-default" />
                 </div>
             </div>
         </div>
     }
-    
     <div>
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Home", "Index")
     </div>
 </body>
 </html>

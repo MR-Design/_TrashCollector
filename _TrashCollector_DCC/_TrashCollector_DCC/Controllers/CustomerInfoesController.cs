@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using _TrashCollector_DCC.Models;
+using Microsoft.AspNet.Identity;
 
 namespace _TrashCollector_DCC.Controllers
 {
@@ -34,6 +35,63 @@ namespace _TrashCollector_DCC.Controllers
             }
             return View(customerInfo);
         }
+
+        // GET: CustomerInfoes/Create      
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: CustomerInfoes/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Money,WeeklyPickup,SuspendPickupsStart,SuspendPickupsEnd,ExtraPickup")] CustomerInfo customerInfo)
+        {
+            var currentCustomer = User.Identity.GetUserId();
+            var thiscustomer = db.Customers.Where(c => c.ApplicationUserId == currentCustomer).SingleOrDefault();
+
+            customerInfo.CustomerInfoID = thiscustomer.Id;
+            //var fk = db.CustomersInfo.Where(s => s.CustomerInfoID == customer.id).SingleOrDefault();
+            db.CustomersInfo.Add(customerInfo);
+            db.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                db.CustomersInfo.Add(customerInfo);
+                db.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+
+            return RedirectToAction("Index", "Home");
+            //    return View(customerInfo);
+        }
+
+
+        //CreateSusPickups
+
+        public ActionResult CreateSusPickups()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateSusPickups([Bind(Include = "Money,WeeklyPickup,SuspendPickupsStart,SuspendPickupsEnd,ExtraPickup")] CustomerInfo customerInfo)
+        {
+            if (ModelState.IsValid)
+            {
+                db.CustomersInfo.Add(customerInfo);
+                db.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+
+            return RedirectToAction("Index", "Home");
+            //    return View(customerInfo);
+        }
+
+
         // NewPickup
         public ActionResult NewPickup()
         {
@@ -73,14 +131,23 @@ namespace _TrashCollector_DCC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreatePickup([Bind(Include = "Money,WeeklyPickup,SuspendPickupsStart,SuspendPickupsEnd,ExtraPickup")] CustomerInfo customerInfo)
         {
+            var currentCustomer = User.Identity.GetUserId();
+            var thiscustomer = db.Customers.Where(c => c.ApplicationUserId == currentCustomer).SingleOrDefault();
+
+            customerInfo.CustomerInfoID = thiscustomer.Id;
+            //var fk = db.CustomersInfo.Where(s => s.CustomerInfoID == customer.id).SingleOrDefault();
+            db.CustomersInfo.Add(customerInfo);
+            db.SaveChanges();
+
             if (ModelState.IsValid)
             {
+
                 db.CustomersInfo.Add(customerInfo);
                 db.SaveChanges();
-                return RedirectToAction("Edit", "Customers");
+                return RedirectToAction("Index", "Home");
             }
 
-            return RedirectToAction("Edit", "Customers");
+            return RedirectToAction("Index", "Home");
             //    return View(customerInfo);
         }
 
