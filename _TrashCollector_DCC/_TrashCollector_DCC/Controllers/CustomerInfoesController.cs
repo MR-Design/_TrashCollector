@@ -22,18 +22,23 @@ namespace _TrashCollector_DCC.Controllers
         }
 
         // GET: CustomerInfoes/Details/5
-        public ActionResult DetailsMoney(double? id)
+        public ActionResult DetailsMoney()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CustomerInfo customerInfo = db.CustomersInfo.Where(c => c.CustomerInfoID == id).SingleOrDefault();
-            if (customerInfo == null)
-            {
-                return HttpNotFound();
-            }
-            return RedirectToAction("Index", "Home");
+
+            var currentCustomer = User.Identity.GetUserId();
+            var thiscustomer = db.Customers.Where(c => c.ApplicationUserId == currentCustomer).SingleOrDefault();
+            var thisCustomerInfo = db.CustomersInfo.Where(m => m.CustomerInfoID == thiscustomer.Id).SingleOrDefault();
+            //customerInfo.CustomerInfoID = thiscustomer.Id;
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            //customerInfo= db.CustomersInfo.Where(c => c.CustomerInfoID == id).SingleOrDefault();
+            //if (customerInfo == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            return View(thisCustomerInfo);
         }
 
         // GET: CustomerInfoes/Create      
