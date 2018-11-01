@@ -340,7 +340,7 @@
     <Content Include="Views\Customers\Create.cshtml" />
     <Content Include="Views\CustomerInfoes\Create.cshtml" />
     <Content Include="Views\CustomerInfoes\Delete.cshtml" />
-    <Content Include="Views\CustomerInfoes\Details.cshtml" />
+    <Content Include="Views\CustomerInfoes\DetailsMoney.cshtml" />
     <Content Include="Views\CustomerInfoes\Edit.cshtml" />
     <Content Include="Views\CustomerInfoes\Index.cshtml" />
     <Content Include="Views\CustomerInfoes\CreatePickup.cshtml" />
