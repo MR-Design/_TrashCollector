@@ -81,6 +81,14 @@ namespace _TrashCollector_DCC.Controllers
         }
 
 
+        // NewPickup
+        public ActionResult NewPickup()
+        {
+            return View();
+        }
+
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateSusPickups([Bind(Include = "Money,WeeklyPickup,SuspendPickupsStart,SuspendPickupsEnd,ExtraPickup")] CustomerInfo customerInfo)
@@ -95,17 +103,7 @@ namespace _TrashCollector_DCC.Controllers
             return RedirectToAction("Index", "Home");
             //    return View(customerInfo);
         }
-
-
-        // NewPickup
-        public ActionResult NewPickup()
-        {
-            return View();
-        }
-
-
-
-        
+       
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -121,6 +119,42 @@ namespace _TrashCollector_DCC.Controllers
             return RedirectToAction("Index", "Home");
             //    return View(customerInfo);
         }
+
+
+
+        public ActionResult EditNewPickup(double? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            CustomerInfo customerInfo = db.CustomersInfo.Find(id);
+            if (customerInfo == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customerInfo);
+        }
+
+        // POST: CustomerInfoes/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditNewPickup([Bind(Include = "Money,WeeklyPickup,SuspendPickupsStart,SuspendPickupsEnd,ExtraPickup")] CustomerInfo customerInfo)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(customerInfo).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(customerInfo);
+        }
+
+
+
+
 
 
         // GET: CustomerInfoes/Create      
