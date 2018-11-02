@@ -355,6 +355,8 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\CustomerInfoes\CreateSusPickups.cshtml" />
+    <Content Include="Views\Employees\Search.cshtml" />
+    <Content Include="Views\Employees\Today.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

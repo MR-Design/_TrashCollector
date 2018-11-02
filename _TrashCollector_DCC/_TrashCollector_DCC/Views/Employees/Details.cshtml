@@ -1,43 +1,49 @@
-﻿@model _TrashCollector_DCC.Models.Employee
+﻿
+        @model _TrashCollector_DCC.Models.CustomerViewModel
 
-@{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
-}
+        @{
+            ViewBag.Title = "Todays Trash Pickups";
+            Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+        }
 
-<h2>Details</h2>
+        <h2>Customer Info</h2>
 
-<div>
-    <h4>Employee</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Employees.FirstName)
-        </dt>
+        <p>
+            @*@Html.ActionLink("Create New", "Create")*@
+        </p>
 
-        <dd>
-            @Html.DisplayFor(model => model.Employees.FirstName)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
+        <table class="table">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.AllCustomers.FirstName)
+                </th>
 
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
+                <th>
+                    @Html.DisplayNameFor(model => model.AllCustomers.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AllCustomers.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AllCustomers.City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AllCustomers.State)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AllCustomers.ZipCode)
+                </th>
+                <th></th>
+            </tr>
 
-    </dl>
-</div>
+         
+
+        </table>
+
+      
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Home to List", "Index")
 </p>

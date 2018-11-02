@@ -18,8 +18,18 @@ namespace _TrashCollector_DCC.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            var customers = db.Customers.ToList() ;
-            return View(customers);
+            var currentEmpId = User.Identity.GetUserId();
+            
+            Employee employee = db.Employees.Where(c => c.ApplicationUserId == currentEmpId).FirstOrDefault();
+
+
+            List<Customer> customer = db.Customers.Where(c => c.ZipCode == employee.ZipCode).ToList();
+
+            CustomerViewModel viewm = new CustomerViewModel();
+            viewm.CustomersList = customer;
+            //viewm.EmployeesList = employee;
+
+            return View(viewm);
         }
 
         // GET: Customers/Details/5

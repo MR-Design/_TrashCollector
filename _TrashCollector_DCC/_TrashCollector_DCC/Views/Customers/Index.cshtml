@@ -1,4 +1,4 @@
-﻿@model IEnumerable<_TrashCollector_DCC.Models.Customer>
+﻿@model IEnumerable<_TrashCollector_DCC.Models.CustomerViewModel>
 
 @{
     ViewBag.Title = "Todays Trash Pickups";
@@ -10,59 +10,60 @@
 <p>
     @*@Html.ActionLink("Create New", "Create")*@
 </p>
+
+
+
 <table class="table">
+   
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.DisplayNameFor(model => model.AllCustomers.FirstName)
+        </th>
+ 
+        <th>
+            @Html.DisplayNameFor(model => model.AllCustomers.LastName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.DisplayNameFor(model => model.AllCustomers.Address)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LastName)
+            @Html.DisplayNameFor(model => model.AllCustomers.City)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Address)
+            @Html.DisplayNameFor(model => model.AllCustomers.State)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.City)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.State)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ZipCode)
+            @Html.DisplayNameFor(model => model.AllCustomers.ZipCode)
         </th>
         <th></th>
     </tr>
+    
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AllCustomers.FirstName)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.AllCustomers.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AllCustomers.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AllCustomers.ZipCode)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.AllCustomers.Id })
+            <td>
+                <input type="checkbox" name="name" value="value"> Mark as Done<br>
+            <td />
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ZipCode)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) 
-
-            <input type="checkbox" name="" value=""> Mark as Done<br>
-
-
-            @*@Html.ActionLink("Details", "Details", new { id = item.Id })*@ 
+            @*@Html.ActionLink("Details", "Details", new { id = item.Id })*@
             @*@Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
-        </td>
-    </tr>
-}
+            </td>
+        </tr>
+    }
 
 </table>
