@@ -91,14 +91,22 @@ namespace _TrashCollector_DCC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateSusPickups([Bind(Include = "Money,WeeklyPickup,SuspendPickupsStart,SuspendPickupsEnd,ExtraPickup")] CustomerInfo customerInfo)
+        public ActionResult CreateSusPickups(CustomerInfo customerInfo)
         {
-            if (ModelState.IsValid)
-            {
-                db.CustomersInfo.Add(customerInfo);
-                db.SaveChanges();
-                return RedirectToAction("Index", "Home");
-            }
+
+            var currentCustomer = User.Identity.GetUserId();
+            var thiscustomer = db.Customers.Where(c => c.ApplicationUserId == currentCustomer).SingleOrDefault();
+
+            customerInfo.CustomerInfoID = thiscustomer.Id;
+            //var fk = db.CustomersInfo.Where(s => s.CustomerInfoID == customer.id).SingleOrDefault();
+            db.CustomersInfo.Add(customerInfo);
+            db.SaveChanges();
+            //if (ModelState.IsValid)
+            //{
+            //    db.CustomersInfo.Add(customerInfo);
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index", "Home");
+            //}
 
             return RedirectToAction("Index", "Home");
             //    return View(customerInfo);
@@ -107,14 +115,21 @@ namespace _TrashCollector_DCC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult NewPickup([Bind(Include = "Money,WeeklyPickup,SuspendPickupsStart,SuspendPickupsEnd,ExtraPickup")] CustomerInfo customerInfo)
+        public ActionResult NewPickup(CustomerInfo customerInfo)
         {
-            if (ModelState.IsValid)
-            {
-                db.CustomersInfo.Add(customerInfo);
-                db.SaveChanges();
-                return RedirectToAction("Index", "Home");
-            }
+            var currentCustomer = User.Identity.GetUserId();
+            var thiscustomer = db.Customers.Where(c => c.ApplicationUserId == currentCustomer).SingleOrDefault();
+
+            customerInfo.CustomerInfoID = thiscustomer.Id;
+            //var fk = db.CustomersInfo.Where(s => s.CustomerInfoID == customer.id).SingleOrDefault();
+            db.CustomersInfo.Add(customerInfo);
+            db.SaveChanges();
+            //if (ModelState.IsValid)
+            //{
+            //    db.CustomersInfo.Add(customerInfo);
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index", "Home");
+            //}
 
             return RedirectToAction("Index", "Home");
             //    return View(customerInfo);
@@ -168,7 +183,7 @@ namespace _TrashCollector_DCC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreatePickup([Bind(Include = "Money,WeeklyPickup,SuspendPickupsStart,SuspendPickupsEnd,ExtraPickup")] CustomerInfo customerInfo)
+        public ActionResult CreatePickup(CustomerInfo customerInfo)
         {
             var currentCustomer = User.Identity.GetUserId();
             var thiscustomer = db.Customers.Where(c => c.ApplicationUserId == currentCustomer).SingleOrDefault();
@@ -178,13 +193,13 @@ namespace _TrashCollector_DCC.Controllers
             db.CustomersInfo.Add(customerInfo);
             db.SaveChanges();
 
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
 
-                db.CustomersInfo.Add(customerInfo);
-                db.SaveChanges();
-                return RedirectToAction("Index", "Home");
-            }
+            //    db.CustomersInfo.Add(customerInfo);
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index", "Home");
+            //}
 
             return RedirectToAction("Index", "Home");
             //    return View(customerInfo);
