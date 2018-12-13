@@ -1,69 +1,129 @@
-﻿@model IEnumerable<_TrashCollector_DCC.Models.CustomerViewModel>
+﻿@model IEnumerable<_TrashCollector_DCC.Models.Customer>
 
 @{
-    ViewBag.Title = "Todays Trash Pickups";
-    //Layout = "~/Views/Shared/_CustomerLayout.cshtml";
+    ViewBag.Title = "Index";
 }
 
-<h2>Todays Trash Pickups</h2>
+<h2>Index</h2>
 
 <p>
-    @*@Html.ActionLink("Create New", "Create")*@
+    @Html.ActionLink("Create New", "Create")
 </p>
-
-
-
 <table class="table">
-   
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.AllCustomers.FirstName)
-        </th>
- 
-        <th>
-            @Html.DisplayNameFor(model => model.AllCustomers.LastName)
+            @Html.DisplayNameFor(model => model.FirstName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AllCustomers.Address)
+            @Html.DisplayNameFor(model => model.LastName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AllCustomers.City)
+            @Html.DisplayNameFor(model => model.WeeklyPickUpDay)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AllCustomers.State)
+            @Html.DisplayNameFor(model => model.WeeklyPickUpDayCompleted)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AllCustomers.ZipCode)
+            @Html.DisplayNameFor(model => model.Balance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExtraPickUp)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExtraPickUpComleted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsSuspended)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Street)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Zip)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lng)
         </th>
         <th></th>
     </tr>
-    
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.AllCustomers.FirstName)
-            </td>
-            
-            <td>
-                @Html.DisplayFor(modelItem => item.AllCustomers.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AllCustomers.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AllCustomers.ZipCode)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.AllCustomers.Id })
-            <td>
-                <input type="checkbox" name="name" value="value"> Mark as Done<br>
-            <td />
 
-            @*@Html.ActionLink("Details", "Details", new { id = item.Id })*@
-            @*@Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
-            </td>
-        </tr>
-    }
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WeeklyPickUpDay)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WeeklyPickUpDayCompleted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Balance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExtraPickUp)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExtraPickUpComleted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsSuspended)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Street)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.State)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Zip)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lng)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
 
 </table>

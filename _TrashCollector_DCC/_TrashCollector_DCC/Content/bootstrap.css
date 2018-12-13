@@ -9028,3 +9028,33 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+
+.home-inner {
+    background-image: url('https://www.eastpikeland.org/vertical/Sites/%7B3F7567AD-BA35-41A6-9117-FD7892D5A0DA%7D/uploads/Trashcan.png');
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
+.caption {
+    width: 100%;
+    max-width: 100%;
+    position: absolute;
+    top: 40%;
+    z-index: 1;
+}
+
+    .caption h3 {
+        color: white;
+        font-size: 2.4rem;
+        text-transform: uppercase;
+        padding-bottom: 2rem;
+    }
+
+.btn {
+    border-width: medium;
+    border-radius: 0;
+    padding: .5rem 1.1rem;
+    font-size: .9rem;
+    text-transform: uppercase;
+}

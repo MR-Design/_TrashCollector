@@ -7,13 +7,13 @@ namespace _TrashCollector_DCC.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class dsfsdf : IMigrationMetadata
+    public sealed partial class ModelsInitialSetUp : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(dsfsdf));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ModelsInitialSetUp));
         
         string IMigrationMetadata.Id
         {
-            get { return "201810312248294_dsfsdf"; }
+            get { return "201812132101571_Models Initial Set Up"; }
         }
         
         string IMigrationMetadata.Source

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -11,6 +9,7 @@ namespace _TrashCollector_DCC.Models
     public class Customer
     {
         [Key]
+
         public int Id { get; set; }
 
         [Display(Name = "First Name")]
@@ -19,30 +18,39 @@ namespace _TrashCollector_DCC.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        
-        [DisplayName("Address Line 1")]
-        public string Address { get; set; }
+        [Display(Name = "Select your weekly pickup day")]
+        public string WeeklyPickUpDay { get; set; }
+        public bool WeeklyPickUpDayCompleted { get; set; }
+        public double? Balance { get; set; }
 
+        //Request Extra Pickup by Date
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Specify your Extra pickup Date")]
+        public DateTime ExtraPickUp { get; set; }
+        public bool ExtraPickUpComleted { get; set; }
+        public double? Fee { get; set; }
+
+
+        //Suspend Pickups by starting and Ending Date
+        public bool IsSuspended { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Start Date")]
+        public DateTime StartDate { get; set; }
+
+
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "End Date")]
+        public DateTime EndDate { get; set; }
+
+
+        public string Street { get; set; }
         public string City { get; set; }
-
-        
         public string State { get; set; }
-
-        
-        [DisplayName("Zip Code")]
-        public int  ZipCode { get; set; }
-
+        public string Zip { get; set; }
+        public string Lat { get; set; }
+        public string Lng { get; set; }
 
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public Nullable<System.DateTime> RegistrationDate { get; set; }
-
-
-
-        [ForeignKey("ApplicationUser")]
-        public string ApplicationUserId { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
-        public IEnumerable<ApplicationUser> ApplicationUsers { get; set; }
     }
 }

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -12,33 +10,15 @@ namespace _TrashCollector_DCC.Models
     {
         [Key]
         public int Id { get; set; }
-
-        [Display(Name = "First Name")]
         public string FirstName { get; set; }
-
-        [Display(Name = "Last Name")]
         public string LastName { get; set; }
-
-        [DisplayName("Address Line 1")]
-        public string Address { get; set; }
-
+        public string Email { get; set; }
+        public string Street { get; set; }
         public string City { get; set; }
 
         public string State { get; set; }
-
-        [DisplayName("Zip Code")]
-        public int ZipCode { get; set; }
-        [ForeignKey("ApplicationUser")]
-        public string ApplicationUserId { get; set; }
-        public ApplicationUser ApplicationUser { get; set; }
-        public IEnumerable<ApplicationUser> ApplicationUsers { get; set; }
-
-
-
-        //// Here where I link the regestration Table with the Customer Table
-        //[ForeignKey("Employee Info")]
-        //[Display(Name = " Employee Info")]
-        //public int EmployeeID { get; set; }
-        //public Employee Employees { get; set; }
+        public int Zip { get; set; }
+        public string Lat { get; set; }
+        public string Lng { get; set; }
     }
 }

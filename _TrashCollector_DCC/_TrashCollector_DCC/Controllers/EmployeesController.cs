@@ -7,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using _TrashCollector_DCC.Models;
-using Microsoft.AspNet.Identity;
 
 namespace _TrashCollector_DCC.Controllers
 {
@@ -18,150 +17,12 @@ namespace _TrashCollector_DCC.Controllers
         // GET: Employees
         public ActionResult Index()
         {
-            
-            var currentEmpId = User.Identity.GetUserId();
-
-            Employee employee = db.Employees.Where(c => c.ApplicationUserId == currentEmpId).FirstOrDefault();
-            CustomerViewModel viewm = new CustomerViewModel();
-              
-            List<Customer> customer = db.Customers.Where(c => c.ZipCode == employee.ZipCode).ToList();
-            viewm.CustomersList = customer;
-            // My Logic For Today Pick Up ... Need a  Nested Forloop maybe
-            string today = DateTime.Today.DayOfWeek.ToString();
-            List<CustomerInfo> custInfo = db.CustomersInfo.Where(c => c.WeeklyPickup == today).Include(c => c.Customer).ToList();
-            List<CustomerInfo> onlyInZip = custInfo.Where(c => c.Customer.ZipCode == employee.ZipCode).ToList();
-            viewm.CustomersInfoList = onlyInZip;
-
-          
-            return View(viewm);
-
+            return View(db.Employees.ToList());
         }
-
-        [HttpPost]
-        public ActionResult Index(string searchString)
-        {
-
-            var currentEmpId = User.Identity.GetUserId();
-
-            Employee employee = db.Employees.Where(c => c.ApplicationUserId == currentEmpId).FirstOrDefault();
-            CustomerViewModel viewm = new CustomerViewModel();
-
-            List<Customer> customer = db.Customers.Where(c => c.ZipCode == employee.ZipCode).ToList();
-            viewm.CustomersList = customer;
-            string today = DateTime.Today.DayOfWeek.ToString();
-            List<CustomerInfo> custInfo = db.CustomersInfo.Where(c => c.WeeklyPickup == today).Include(c => c.Customer).ToList();
-            
-
-            //My Logic for the search..
-            // I need To check How can I pull Input with a differnt way
-            if (!String.IsNullOrEmpty(searchString))
-            {
-
-                custInfo = db.CustomersInfo.Where(s => s.WeeklyPickup == searchString).ToList();
-                viewm.CustomersList = customer;
-                db.SaveChanges();
-            }
-            return View(viewm);
-
-        }
-        //public ActionResult Today(List<CustomerInfo> cst)
-        //{
-        //    string today = DateTime.Today.DayOfWeek.ToString();
-        //   // var cust = db.CustomersInfo.Where(c=>c.Id ==)
-        //     db.Customers.Where(c => c.ApplicationUserId == cst.).FirstOrDefault();
-
-        //    CustomerViewModel viewm = new CustomerViewModel();
-
-        //    // My Logic For Today Pick Up ... Need a  Nested Forloop maybe
-
-
-        //       // viewm.CustomersList = customer;
-        //        db.SaveChanges();
-
-        //    return View(viewm);
-
-        //}
-
-
-        public ActionResult Search(string sortOrder, string searchString)
-        {
-         
-            CustomerViewModel viewm = new CustomerViewModel();
-            //ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "Monday" : "";
-
-
-            //List<Customer> customer = db.Customers.Select(c => c).ToList();
-            //viewm.CustomersList = customer;
-
-          
-
-            List<CustomerInfo> custInfo = db.CustomersInfo.ToList();
-
-
-            if (!String.IsNullOrEmpty(searchString)) {
-
-                custInfo = db.CustomersInfo.Where(s => s.WeeklyPickup == searchString).ToList();
-            }
-            viewm.CustomersInfoList = custInfo;
-            //var CustomersInEmployee = db.Employees.Include(c => c.ApplicationUsers);
-            //return View(CustomersInEmployee.ToList());
-            return View(viewm);
-        }
-
-        //public ActionResult Index(Customer customer)
-        //{
-        //    var employees = db.Customers.ToList();
-        //    RedirectToAction("Index");
-        //    return View(customer);
-        //}
 
         // GET: Employees/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Customer customer = db.Customers.Where(s => s.Id == id).SingleOrDefault();
-            CustomerViewModel viewm = new CustomerViewModel();
-            viewm.AllCustomers = customer;           
-            return View(viewm);
-        }
-
-        // GET: Employees/Create
-        public ActionResult Create()
-        {
-            ViewBag.EmployeeID = new SelectList(db.Employees, "Id", "FirstName");
-            return View();
-        }
-
-        // POST: Employees/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public ActionResult Create( Employee employee)
-        {
-            
-            if (ModelState.IsValid)
-            {
-                var currentCustomer = User.Identity.GetUserId();
-                employee.ApplicationUserId = currentCustomer;
-
-                
-                db.Employees.Add(employee);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.EmployeeID = new SelectList(db.Employees, "Id", "FirstName", employee.Id);
-            return RedirectToAction("Index");
-        }
-
-        // GET: Employees/Edit/5
-        public ActionResult Edit(int? id)
-        {
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -171,7 +32,44 @@ namespace _TrashCollector_DCC.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.EmployeeID = new SelectList(db.Employees, "Id", "FirstName", employee.Id);
+            return View(employee);
+        }
+
+        // GET: Employees/Create
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Employees/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Email,Street,City,State,Zip,Lat,Lng")] Employee employee)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Employees.Add(employee);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(employee);
+        }
+
+        // GET: Employees/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Employee employee = db.Employees.Find(id);
+            if (employee == null)
+            {
+                return HttpNotFound();
+            }
             return View(employee);
         }
 
@@ -180,7 +78,7 @@ namespace _TrashCollector_DCC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,EmployeeID")] Employee employee)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Email,Street,City,State,Zip,Lat,Lng")] Employee employee)
         {
             if (ModelState.IsValid)
             {
@@ -188,7 +86,6 @@ namespace _TrashCollector_DCC.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.EmployeeID = new SelectList(db.Employees, "Id", "FirstName", employee.Id);
             return View(employee);
         }
 
