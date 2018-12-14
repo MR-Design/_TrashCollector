@@ -15,7 +15,7 @@ namespace _TrashCollector_DCC.Models
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
-        [Display(Name = "Last Name")]
+        [Display(Name = "First Name")]
         public string LastName { get; set; }
 
         [Display(Name = "Select your weekly pickup day")]
@@ -26,7 +26,7 @@ namespace _TrashCollector_DCC.Models
         //Request Extra Pickup by Date
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Specify your Extra pickup Date")]
-        public DateTime ExtraPickUp { get; set; }
+        public DateTime? ExtraPickUp { get; set; }
         public bool ExtraPickUpComleted { get; set; }
         public double? Fee { get; set; }
 
@@ -36,12 +36,12 @@ namespace _TrashCollector_DCC.Models
 
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Start Date")]
-        public DateTime StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
 
 
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "End Date")]
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
 
         public string Street { get; set; }

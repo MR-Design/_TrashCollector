@@ -227,6 +227,10 @@
     <Compile Include="Migrations\201812132101571_Models Initial Set Up.Designer.cs">
       <DependentUpon>201812132101571_Models Initial Set Up.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812140321596_add-migration AcceptNullValue.cs" />
+    <Compile Include="Migrations\201812140321596_add-migration AcceptNullValue.Designer.cs">
+      <DependentUpon>201812140321596_add-migration AcceptNullValue.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -350,6 +354,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812132101571_Models Initial Set Up.resx">
       <DependentUpon>201812132101571_Models Initial Set Up.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812140321596_add-migration AcceptNullValue.resx">
+      <DependentUpon>201812140321596_add-migration AcceptNullValue.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

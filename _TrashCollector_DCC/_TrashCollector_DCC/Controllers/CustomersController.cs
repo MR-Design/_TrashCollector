@@ -46,10 +46,11 @@ namespace _TrashCollector_DCC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,WeeklyPickUpDay,WeeklyPickUpDayCompleted,Balance,ExtraPickUp,ExtraPickUpComleted,Fee,IsSuspended,StartDate,EndDate,Street,City,State,Zip,Lat,Lng")] Customer customer)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,WeeklyPickUpDay,Street,City,State,Zip")] Customer customer)
         {
             if (ModelState.IsValid)
             {
+
                 db.Customers.Add(customer);
                 db.SaveChanges();
                 return RedirectToAction("Index");
