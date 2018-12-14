@@ -10,107 +10,112 @@ using _TrashCollector_DCC.Models;
 
 namespace _TrashCollector_DCC.Controllers
 {
-    public class CustomersController : Controller
+    public class SuspendPickUpsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Customers
+        // GET: SuspendPickUps
         public ActionResult Index()
         {
-            return View(db.Customers.ToList());
+            var suspendPickUps = db.SuspendPickUps.Include(s => s.Customers);
+            return View(suspendPickUps.ToList());
         }
 
-        // GET: Customers/Details/5
+        // GET: SuspendPickUps/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
+            SuspendPickUp suspendPickUp = db.SuspendPickUps.Find(id);
+            if (suspendPickUp == null)
             {
                 return HttpNotFound();
             }
-            return View(customer);
+            return View(suspendPickUp);
         }
 
-        // GET: Customers/Create
+        // GET: SuspendPickUps/Create
         public ActionResult Create()
         {
+            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FirstName");
             return View();
         }
 
-        // POST: Customers/Create
+        // POST: SuspendPickUps/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Street,City,State,Zip,Lat,Lng")] Customer customer)
+        public ActionResult Create([Bind(Include = "Id,CustomerId,IsSuspended,StartDate,EndDate")] SuspendPickUp suspendPickUp)
         {
             if (ModelState.IsValid)
             {
-                db.Customers.Add(customer);
+                db.SuspendPickUps.Add(suspendPickUp);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(customer);
+            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FirstName", suspendPickUp.CustomerId);
+            return View(suspendPickUp);
         }
 
-        // GET: Customers/Edit/5
+        // GET: SuspendPickUps/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
+            SuspendPickUp suspendPickUp = db.SuspendPickUps.Find(id);
+            if (suspendPickUp == null)
             {
                 return HttpNotFound();
             }
-            return View(customer);
+            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FirstName", suspendPickUp.CustomerId);
+            return View(suspendPickUp);
         }
 
-        // POST: Customers/Edit/5
+        // POST: SuspendPickUps/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Street,City,State,Zip,Lat,Lng")] Customer customer)
+        public ActionResult Edit([Bind(Include = "Id,CustomerId,IsSuspended,StartDate,EndDate")] SuspendPickUp suspendPickUp)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(customer).State = EntityState.Modified;
+                db.Entry(suspendPickUp).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(customer);
+            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FirstName", suspendPickUp.CustomerId);
+            return View(suspendPickUp);
         }
 
-        // GET: Customers/Delete/5
+        // GET: SuspendPickUps/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
+            SuspendPickUp suspendPickUp = db.SuspendPickUps.Find(id);
+            if (suspendPickUp == null)
             {
                 return HttpNotFound();
             }
-            return View(customer);
+            return View(suspendPickUp);
         }
 
-        // POST: Customers/Delete/5
+        // POST: SuspendPickUps/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Customer customer = db.Customers.Find(id);
-            db.Customers.Remove(customer);
+            SuspendPickUp suspendPickUp = db.SuspendPickUps.Find(id);
+            db.SuspendPickUps.Remove(suspendPickUp);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

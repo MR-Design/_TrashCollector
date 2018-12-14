@@ -10,107 +10,112 @@ using _TrashCollector_DCC.Models;
 
 namespace _TrashCollector_DCC.Controllers
 {
-    public class CustomersController : Controller
+    public class ExtraPickupsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Customers
+        // GET: ExtraPickups
         public ActionResult Index()
         {
-            return View(db.Customers.ToList());
+            var extraPickups = db.ExtraPickups.Include(e => e.Customers);
+            return View(extraPickups.ToList());
         }
 
-        // GET: Customers/Details/5
+        // GET: ExtraPickups/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
+            ExtraPickup extraPickup = db.ExtraPickups.Find(id);
+            if (extraPickup == null)
             {
                 return HttpNotFound();
             }
-            return View(customer);
+            return View(extraPickup);
         }
 
-        // GET: Customers/Create
+        // GET: ExtraPickups/Create
         public ActionResult Create()
         {
+            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FirstName");
             return View();
         }
 
-        // POST: Customers/Create
+        // POST: ExtraPickups/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Street,City,State,Zip,Lat,Lng")] Customer customer)
+        public ActionResult Create([Bind(Include = "Id,CustomerId,ExtraPickUp,ExtraPickUpComleted,Fee")] ExtraPickup extraPickup)
         {
             if (ModelState.IsValid)
             {
-                db.Customers.Add(customer);
+                db.ExtraPickups.Add(extraPickup);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(customer);
+            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FirstName", extraPickup.CustomerId);
+            return View(extraPickup);
         }
 
-        // GET: Customers/Edit/5
+        // GET: ExtraPickups/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
+            ExtraPickup extraPickup = db.ExtraPickups.Find(id);
+            if (extraPickup == null)
             {
                 return HttpNotFound();
             }
-            return View(customer);
+            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FirstName", extraPickup.CustomerId);
+            return View(extraPickup);
         }
 
-        // POST: Customers/Edit/5
+        // POST: ExtraPickups/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Street,City,State,Zip,Lat,Lng")] Customer customer)
+        public ActionResult Edit([Bind(Include = "Id,CustomerId,ExtraPickUp,ExtraPickUpComleted,Fee")] ExtraPickup extraPickup)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(customer).State = EntityState.Modified;
+                db.Entry(extraPickup).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(customer);
+            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FirstName", extraPickup.CustomerId);
+            return View(extraPickup);
         }
 
-        // GET: Customers/Delete/5
+        // GET: ExtraPickups/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
-            if (customer == null)
+            ExtraPickup extraPickup = db.ExtraPickups.Find(id);
+            if (extraPickup == null)
             {
                 return HttpNotFound();
             }
-            return View(customer);
+            return View(extraPickup);
         }
 
-        // POST: Customers/Delete/5
+        // POST: ExtraPickups/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Customer customer = db.Customers.Find(id);
-            db.Customers.Remove(customer);
+            ExtraPickup extraPickup = db.ExtraPickups.Find(id);
+            db.ExtraPickups.Remove(extraPickup);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

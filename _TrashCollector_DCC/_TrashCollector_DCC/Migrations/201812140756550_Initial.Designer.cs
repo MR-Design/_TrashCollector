@@ -7,13 +7,13 @@ namespace _TrashCollector_DCC.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class InitialandUserrolles : IMigrationMetadata
+    public sealed partial class Initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialandUserrolles));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201812130204264_Initial and User rolles"; }
+            get { return "201812140756550_Initial"; }
         }
         
         string IMigrationMetadata.Source

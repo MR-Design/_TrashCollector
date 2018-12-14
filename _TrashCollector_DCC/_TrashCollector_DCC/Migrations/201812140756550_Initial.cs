@@ -3,10 +3,57 @@ namespace _TrashCollector_DCC.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialandUserrolles : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.Customers",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        FirstName = c.String(),
+                        LastName = c.String(),
+                        Street = c.String(),
+                        City = c.String(),
+                        State = c.String(),
+                        Zip = c.String(),
+                        Lat = c.String(),
+                        Lng = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Employees",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        FirstName = c.String(),
+                        LastName = c.String(),
+                        Email = c.String(),
+                        Street = c.String(),
+                        City = c.String(),
+                        State = c.String(),
+                        Zip = c.Int(nullable: false),
+                        Lat = c.String(),
+                        Lng = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.ExtraPickups",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        CustomerId = c.Int(nullable: false),
+                        ExtraPickUp = c.DateTime(),
+                        ExtraPickUpComleted = c.Boolean(nullable: false),
+                        Fee = c.Double(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Customers", t => t.CustomerId, cascadeDelete: true)
+                .Index(t => t.CustomerId);
+            
             CreateTable(
                 "dbo.AspNetRoles",
                 c => new
@@ -29,6 +76,20 @@ namespace _TrashCollector_DCC.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId)
                 .Index(t => t.RoleId);
+            
+            CreateTable(
+                "dbo.SuspendPickUps",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        CustomerId = c.Int(nullable: false),
+                        IsSuspended = c.Boolean(nullable: false),
+                        StartDate = c.DateTime(),
+                        EndDate = c.DateTime(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Customers", t => t.CustomerId, cascadeDelete: true)
+                .Index(t => t.CustomerId);
             
             CreateTable(
                 "dbo.AspNetUsers",
@@ -75,25 +136,50 @@ namespace _TrashCollector_DCC.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
+            CreateTable(
+                "dbo.WeeklyPickupDays",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        CustomerId = c.Int(nullable: false),
+                        WeeklyPickUpDay = c.String(),
+                        WeeklyPickUpDayCompleted = c.Boolean(nullable: false),
+                        Balance = c.Double(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Customers", t => t.CustomerId, cascadeDelete: true)
+                .Index(t => t.CustomerId);
+            
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.WeeklyPickupDays", "CustomerId", "dbo.Customers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.SuspendPickUps", "CustomerId", "dbo.Customers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.ExtraPickups", "CustomerId", "dbo.Customers");
+            DropIndex("dbo.WeeklyPickupDays", new[] { "CustomerId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
+            DropIndex("dbo.SuspendPickUps", new[] { "CustomerId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.ExtraPickups", new[] { "CustomerId" });
+            DropTable("dbo.WeeklyPickupDays");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
+            DropTable("dbo.SuspendPickUps");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.ExtraPickups");
+            DropTable("dbo.Employees");
+            DropTable("dbo.Customers");
         }
     }
 }
