@@ -39,7 +39,7 @@ namespace _TrashCollector_DCC.Controllers
         // GET: ExtraPickups/Create
         public ActionResult Create()
         {
-            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FirstName");
+            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "UserId");
             return View();
         }
 
@@ -48,7 +48,7 @@ namespace _TrashCollector_DCC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CustomerId,ExtraPickUp,ExtraPickUpComleted,Fee")] ExtraPickup extraPickup)
+        public ActionResult Create([Bind(Include = "Id,CustomerId,ExtraPickUp_start,ExtraPickUp_end,ExtraPickUpComleted,Fee")] ExtraPickup extraPickup)
         {
             if (ModelState.IsValid)
             {
@@ -57,7 +57,7 @@ namespace _TrashCollector_DCC.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FirstName", extraPickup.CustomerId);
+            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "UserId", extraPickup.CustomerId);
             return View(extraPickup);
         }
 
@@ -73,7 +73,7 @@ namespace _TrashCollector_DCC.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FirstName", extraPickup.CustomerId);
+            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "UserId", extraPickup.CustomerId);
             return View(extraPickup);
         }
 
@@ -82,7 +82,7 @@ namespace _TrashCollector_DCC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CustomerId,ExtraPickUp,ExtraPickUpComleted,Fee")] ExtraPickup extraPickup)
+        public ActionResult Edit([Bind(Include = "Id,CustomerId,ExtraPickUp_start,ExtraPickUp_end,ExtraPickUpComleted,Fee")] ExtraPickup extraPickup)
         {
             if (ModelState.IsValid)
             {
@@ -90,7 +90,7 @@ namespace _TrashCollector_DCC.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FirstName", extraPickup.CustomerId);
+            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "UserId", extraPickup.CustomerId);
             return View(extraPickup);
         }
 

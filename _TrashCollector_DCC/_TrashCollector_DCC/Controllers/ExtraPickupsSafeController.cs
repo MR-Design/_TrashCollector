@@ -10,112 +10,112 @@ using _TrashCollector_DCC.Models;
 
 namespace _TrashCollector_DCC.Controllers
 {
-    public class WeeklyPickupDaysController : Controller
+    public class ExtraPickupsSafeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: WeeklyPickupDays
+        // GET: ExtraPickups
         public ActionResult Index()
         {
-            var weeklyPickupDays = db.WeeklyPickupDays.Include(w => w.Customers);
-            return View(weeklyPickupDays.ToList());
+            var extraPickups = db.ExtraPickups.Include(e => e.Customers);
+            return View(extraPickups.ToList());
         }
 
-        // GET: WeeklyPickupDays/Details/5
+        // GET: ExtraPickups/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            WeeklyPickupDay weeklyPickupDay = db.WeeklyPickupDays.Find(id);
-            if (weeklyPickupDay == null)
+            ExtraPickup extraPickup = db.ExtraPickups.Find(id);
+            if (extraPickup == null)
             {
                 return HttpNotFound();
             }
-            return View(weeklyPickupDay);
+            return View(extraPickup);
         }
 
-        // GET: WeeklyPickupDays/Create
+        // GET: ExtraPickups/Create
         public ActionResult Create()
         {
             ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FirstName");
             return View();
         }
 
-        // POST: WeeklyPickupDays/Create
+        // POST: ExtraPickups/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CustomerId,WeeklyPickUpDay,WeeklyPickUpDayCompleted,Balance")] WeeklyPickupDay weeklyPickupDay)
+        public ActionResult Create([Bind(Include = "Id,CustomerId,ExtraPickUp,ExtraPickUpComleted,Fee")] ExtraPickup extraPickup)
         {
             if (ModelState.IsValid)
             {
-                db.WeeklyPickupDays.Add(weeklyPickupDay);
+                db.ExtraPickups.Add(extraPickup);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FirstName", weeklyPickupDay.CustomerId);
-            return View(weeklyPickupDay);
+            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FirstName", extraPickup.CustomerId);
+            return View(extraPickup);
         }
 
-        // GET: WeeklyPickupDays/Edit/5
+        // GET: ExtraPickups/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            WeeklyPickupDay weeklyPickupDay = db.WeeklyPickupDays.Find(id);
-            if (weeklyPickupDay == null)
+            ExtraPickup extraPickup = db.ExtraPickups.Find(id);
+            if (extraPickup == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FirstName", weeklyPickupDay.CustomerId);
-            return View(weeklyPickupDay);
+            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FirstName", extraPickup.CustomerId);
+            return View(extraPickup);
         }
 
-        // POST: WeeklyPickupDays/Edit/5
+        // POST: ExtraPickups/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,CustomerId,WeeklyPickUpDay,WeeklyPickUpDayCompleted,Balance")] WeeklyPickupDay weeklyPickupDay)
+        public ActionResult Edit([Bind(Include = "Id,CustomerId,ExtraPickUp,ExtraPickUpComleted,Fee")] ExtraPickup extraPickup)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(weeklyPickupDay).State = EntityState.Modified;
+                db.Entry(extraPickup).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FirstName", weeklyPickupDay.CustomerId);
-            return View(weeklyPickupDay);
+            ViewBag.CustomerId = new SelectList(db.Customers, "Id", "FirstName", extraPickup.CustomerId);
+            return View(extraPickup);
         }
 
-        // GET: WeeklyPickupDays/Delete/5
+        // GET: ExtraPickups/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            WeeklyPickupDay weeklyPickupDay = db.WeeklyPickupDays.Find(id);
-            if (weeklyPickupDay == null)
+            ExtraPickup extraPickup = db.ExtraPickups.Find(id);
+            if (extraPickup == null)
             {
                 return HttpNotFound();
             }
-            return View(weeklyPickupDay);
+            return View(extraPickup);
         }
 
-        // POST: WeeklyPickupDays/Delete/5
+        // POST: ExtraPickups/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            WeeklyPickupDay weeklyPickupDay = db.WeeklyPickupDays.Find(id);
-            db.WeeklyPickupDays.Remove(weeklyPickupDay);
+            ExtraPickup extraPickup = db.ExtraPickups.Find(id);
+            db.ExtraPickups.Remove(extraPickup);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

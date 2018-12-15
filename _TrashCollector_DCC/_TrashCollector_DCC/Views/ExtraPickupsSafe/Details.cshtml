@@ -1,4 +1,4 @@
-﻿@model _TrashCollector_DCC.Models.WeeklyPickupDay
+﻿@model _TrashCollector_DCC.Models.ExtraPickup
 
 @{
     ViewBag.Title = "Details";
@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>WeeklyPickupDay</h4>
+    <h4>ExtraPickup</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -19,27 +19,27 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.WeeklyPickUpDay)
+            @Html.DisplayNameFor(model => model.ExtraPickUp)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.WeeklyPickUpDay)
+            @Html.DisplayFor(model => model.ExtraPickUp)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.WeeklyPickUpDayCompleted)
+            @Html.DisplayNameFor(model => model.ExtraPickUpComleted)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.WeeklyPickUpDayCompleted)
+            @Html.DisplayFor(model => model.ExtraPickUpComleted)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Balance)
+            @Html.DisplayNameFor(model => model.Fee)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Balance)
+            @Html.DisplayFor(model => model.Fee)
         </dd>
 
     </dl>

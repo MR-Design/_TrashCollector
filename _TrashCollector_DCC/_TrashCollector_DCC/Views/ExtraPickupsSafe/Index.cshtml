@@ -1,4 +1,4 @@
-﻿@model IEnumerable<_TrashCollector_DCC.Models.WeeklyPickupDay>
+﻿@model IEnumerable<_TrashCollector_DCC.Models.ExtraPickup>
 
 @{
     ViewBag.Title = "Index";
@@ -15,13 +15,13 @@
             @Html.DisplayNameFor(model => model.Customers.FirstName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.WeeklyPickUpDay)
+            @Html.DisplayNameFor(model => model.ExtraPickUp)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.WeeklyPickUpDayCompleted)
+            @Html.DisplayNameFor(model => model.ExtraPickUpComleted)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Balance)
+            @Html.DisplayNameFor(model => model.Fee)
         </th>
         <th></th>
     </tr>
@@ -32,13 +32,13 @@
             @Html.DisplayFor(modelItem => item.Customers.FirstName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.WeeklyPickUpDay)
+            @Html.DisplayFor(modelItem => item.ExtraPickUp)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.WeeklyPickUpDayCompleted)
+            @Html.DisplayFor(modelItem => item.ExtraPickUpComleted)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Balance)
+            @Html.DisplayFor(modelItem => item.Fee)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

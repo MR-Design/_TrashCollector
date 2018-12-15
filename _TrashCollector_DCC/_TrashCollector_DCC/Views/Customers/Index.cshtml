@@ -35,6 +35,24 @@
         <th>
             @Html.DisplayNameFor(model => model.Lng)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WeeklyPickUpDay)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WeeklyPickUpDayCompleted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Balance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsSuspended)
+        </th>
         <th></th>
     </tr>
 
@@ -63,6 +81,24 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Lng)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WeeklyPickUpDay)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WeeklyPickUpDayCompleted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Balance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsSuspended)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

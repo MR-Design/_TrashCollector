@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using _TrashCollector_DCC.Models;
+using Microsoft.AspNet.Identity;
 
 namespace _TrashCollector_DCC.Controllers
 {
@@ -35,6 +36,8 @@ namespace _TrashCollector_DCC.Controllers
             return View(customer);
         }
 
+      
+
         // GET: Customers/Create
         public ActionResult Create()
         {
@@ -46,13 +49,17 @@ namespace _TrashCollector_DCC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Street,City,State,Zip,Lat,Lng")] Customer customer)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Street,City,State,WeeklyPickUpDay,UserId")] Customer customer)
         {
+            
             if (ModelState.IsValid)
             {
+                var currentCustomer = User.Identity.GetUserId();
+                customer.UserId = currentCustomer;
+                customer.Balance = 0.00;
                 db.Customers.Add(customer);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Account", "Customers");
             }
 
             return View(customer);
@@ -78,16 +85,78 @@ namespace _TrashCollector_DCC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Street,City,State,Zip,Lat,Lng")] Customer customer)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Street,City,State,Zip,Lat,Lng,WeeklyPickUpDay,WeeklyPickUpDayCompleted,Balance,StartDate,EndDate,IsSuspended,UserId")] Customer customer)
         {
             if (ModelState.IsValid)
             {
+                var currentCustomer = User.Identity.GetUserId();
+                customer.UserId = currentCustomer;
                 db.Entry(customer).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(customer);
         }
+
+        // GET: Customers/Edit/5
+        public ActionResult EditWeeklyPickup(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = db.Customers.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
+
+        // POST: Customers/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditWeeklyPickup([Bind(Include = "Id,FirstName,LastName,Street,City,State,Zip,Lat,Lng,WeeklyPickUpDay,WeeklyPickUpDayCompleted,Balance,StartDate,EndDate,IsSuspended,UserId")] Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                var currentCustomer = User.Identity.GetUserId();
+                customer.UserId = currentCustomer;
+                db.Entry(customer).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Account", "Customers");
+            }
+            return View();
+        }
+
+        // GET: Account/Details/5
+        public ActionResult Account(CustomerAccountViewModel view)
+        {
+             view = new CustomerAccountViewModel()
+            {
+                customer = new Customer()
+
+            };
+
+            var currentUser = User.Identity.GetUserId();
+            Customer customer = db.Customers.Where(s => s.UserId == currentUser).SingleOrDefault();
+            view.customer = customer;
+            var customers =  db.Customers
+                .Include(r => r.ApplicationUser)
+                .FirstOrDefault(m => m.UserId == currentUser);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(view);
+        }
+
+        // POST: Customers/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        
 
         // GET: Customers/Delete/5
         public ActionResult Delete(int? id)

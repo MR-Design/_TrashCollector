@@ -38,10 +38,10 @@ namespace _TrashCollector_DCC.Models
 
 
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<Employee> Employees { get; set; }
-        public DbSet<WeeklyPickupDay> WeeklyPickupDays { get; set; }
-        public DbSet<SuspendPickUp> SuspendPickUps { get; set; }
         public DbSet<ExtraPickup> ExtraPickups { get; set; }
+
+        public DbSet<Employee> Employees { get; set; }
+   
        
 
 

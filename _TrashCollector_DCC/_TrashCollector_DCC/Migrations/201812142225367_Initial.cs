@@ -20,6 +20,12 @@ namespace _TrashCollector_DCC.Migrations
                         Zip = c.String(),
                         Lat = c.String(),
                         Lng = c.String(),
+                        WeeklyPickUpDay = c.String(),
+                        WeeklyPickUpDayCompleted = c.Boolean(nullable: false),
+                        Balance = c.Double(),
+                        StartDate = c.DateTime(),
+                        EndDate = c.DateTime(),
+                        IsSuspended = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -78,20 +84,6 @@ namespace _TrashCollector_DCC.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
-                "dbo.SuspendPickUps",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        CustomerId = c.Int(nullable: false),
-                        IsSuspended = c.Boolean(nullable: false),
-                        StartDate = c.DateTime(),
-                        EndDate = c.DateTime(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Customers", t => t.CustomerId, cascadeDelete: true)
-                .Index(t => t.CustomerId);
-            
-            CreateTable(
                 "dbo.AspNetUsers",
                 c => new
                     {
@@ -136,45 +128,25 @@ namespace _TrashCollector_DCC.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
             
-            CreateTable(
-                "dbo.WeeklyPickupDays",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        CustomerId = c.Int(nullable: false),
-                        WeeklyPickUpDay = c.String(),
-                        WeeklyPickUpDayCompleted = c.Boolean(nullable: false),
-                        Balance = c.Double(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Customers", t => t.CustomerId, cascadeDelete: true)
-                .Index(t => t.CustomerId);
-            
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.WeeklyPickupDays", "CustomerId", "dbo.Customers");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.SuspendPickUps", "CustomerId", "dbo.Customers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.ExtraPickups", "CustomerId", "dbo.Customers");
-            DropIndex("dbo.WeeklyPickupDays", new[] { "CustomerId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
-            DropIndex("dbo.SuspendPickUps", new[] { "CustomerId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.ExtraPickups", new[] { "CustomerId" });
-            DropTable("dbo.WeeklyPickupDays");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
-            DropTable("dbo.SuspendPickUps");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.ExtraPickups");

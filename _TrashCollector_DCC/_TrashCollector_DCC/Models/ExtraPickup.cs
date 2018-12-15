@@ -17,8 +17,13 @@ namespace _TrashCollector_DCC.Models
         public Customer Customers { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Specify your Extra pickup Date")]
-        public DateTime? ExtraPickUp { get; set; }
+        [Display(Name = "Specify your Starting pickup Date")]
+        public DateTime? ExtraPickUp_start { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Specify your Ending pickup Date")]
+        public DateTime? ExtraPickUp_end { get; set; }
+
         public bool ExtraPickUpComleted { get; set; }
         public double? Fee { get; set; }
     }
