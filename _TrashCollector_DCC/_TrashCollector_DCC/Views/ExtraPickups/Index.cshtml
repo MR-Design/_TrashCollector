@@ -11,9 +11,7 @@
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Customers.UserId)
-        </th>
+        
         <th>
             @Html.DisplayNameFor(model => model.ExtraPickUp_start)
         </th>
@@ -31,9 +29,7 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Customers.UserId)
-        </td>
+       
         <td>
             @Html.DisplayFor(modelItem => item.ExtraPickUp_start)
         </td>

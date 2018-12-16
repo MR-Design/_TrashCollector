@@ -14,7 +14,34 @@ namespace _TrashCollector_DCC.Controllers
     public class CustomersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        // GET: Customers/Delete/5
+        public ActionResult ActivateAccount(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = db.Customers.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
 
+        // POST: Customers/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ActivateAccount(int id)
+        {
+            Customer customer = db.Customers.Find(id);
+                  customer.IsSuspended = false;
+
+            db.Entry(customer).State = EntityState.Modified; db.SaveChanges();
+            return RedirectToAction("Account", "Customers");
+        }
+
+      
         // GET: Customers
         public ActionResult Index()
         {
@@ -131,16 +158,52 @@ namespace _TrashCollector_DCC.Controllers
             return View();
         }
 
+        // GET: Customers/Edit/5
+        public ActionResult SuspendAcount(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = db.Customers.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
+
+        // POST: Customers/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SuspendAcount([Bind(Include = "Id,FirstName,LastName,Street,City,State,Zip,Lat,Lng,WeeklyPickUpDay,WeeklyPickUpDayCompleted,Balance,StartDate,EndDate,IsSuspended,UserId")] Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                var currentCustomer = User.Identity.GetUserId();
+                customer.UserId = currentCustomer;
+                customer.IsSuspended = true;
+                db.Entry(customer).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Account", "Customers");
+            }
+            return View();
+        }
         // GET: Account/Details/5
-        public ActionResult Account(CustomerAccountViewModel view)
+        public ActionResult Account(CustomerAccountViewModel view, ExtraPickup extraPickup)
         {
              view = new CustomerAccountViewModel()
             {
-                customer = new Customer()
+                customer = new Customer(),
+                //extraPickups = new List<ExtraPickup>()
 
-            };
-
+        };
             var currentUser = User.Identity.GetUserId();
+            view.extraPickups = db.ExtraPickups.Where(e => e.CustomerId == currentUser).ToList();
+
+
             Customer customer = db.Customers.Where(s => s.UserId == currentUser).SingleOrDefault();
             view.customer = customer;
             var customers =  db.Customers

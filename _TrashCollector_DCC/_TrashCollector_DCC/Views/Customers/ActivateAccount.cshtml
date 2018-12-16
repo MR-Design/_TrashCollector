@@ -1,0 +1,23 @@
+﻿@model _TrashCollector_DCC.Models.Customer
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<h3>Welcome Back</h3>
+<div>
+    <hr />
+  
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Confirme" class="btn btn-primary" />
+
+        @Html.ActionLink("Maybe Later", "Account", "Customers", null, htmlAttributes: new { @class = "btn btn-primary" })
+
+    </div>
+    }
+</div>

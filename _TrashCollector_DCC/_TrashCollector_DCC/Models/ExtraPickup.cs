@@ -12,9 +12,9 @@ namespace _TrashCollector_DCC.Models
         [Key]
         public int Id { get; set; }
 
-        [ForeignKey("Customers")]
-        public int CustomerId { get; set; }
-        public Customer Customers { get; set; }
+        [ForeignKey("ApplicationUser")]
+        public string CustomerId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Specify your Starting pickup Date")]

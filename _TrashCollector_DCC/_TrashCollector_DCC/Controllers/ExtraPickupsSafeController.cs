@@ -15,11 +15,11 @@ namespace _TrashCollector_DCC.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: ExtraPickups
-        public ActionResult Index()
-        {
-            var extraPickups = db.ExtraPickups.Include(e => e.Customers);
-            return View(extraPickups.ToList());
-        }
+        //public ActionResult Index()
+        //{
+        //    var extraPickups = db.ExtraPickups.Include(e => e.Customers);
+        //    return View(extraPickups.ToList());
+        //}
 
         // GET: ExtraPickups/Details/5
         public ActionResult Details(int? id)

@@ -4,48 +4,107 @@
     ViewBag.Title = "Details";
 }
 
-
-<div>
-    <h4>Customer Account </h4>
+<div class="container">
+    <h4>Dashboard </h4>
     <hr />
-    <dl class="dl-horizontal">
+    <div class="row">
+
+        <div class="col-6">
+
+            <dl class="dl-horizontal">
+
+
+                <dd>
+                    Full Name:  @Html.DisplayFor(model => model.customer.FirstName)  @Html.DisplayFor(model => model.customer.LastName)
+
+                </dd>
+
+
+
+                <dd>
+
+                    Address: @Html.DisplayFor(model => model.customer.Street) ,@Html.DisplayFor(model => model.customer.City) @Html.DisplayFor(model => model.customer.State) @Html.DisplayFor(model => model.customer.Zip)
+
+                </dd>
+
+
+                <dd>
+                </dd>
+
+
+
+
+
+                <dd>
+
+
+                    Your Weekly PickUp Day :  @Html.DisplayFor(model => model.customer.WeeklyPickUpDay)   @Html.ActionLink("Edit", "EditWeeklyPickup", new { id = Model.customer.Id })
+
+                </dd>
+
+
+
+
+                <dd>
+
+                    Your Balance :$ @Html.DisplayFor(model => model.customer.Balance) <div class="btn btn-primary"> Pay Now </div>
+                </dd>
+
+
+                @if (Model.customer.IsSuspended == false)
+                {
+
+                    <dd>
+                        <hr />
+
+                        Are You Away From Home?  @Html.ActionLink("Suspend Account", "SuspendAcount", new { id = Model.customer.Id })
+
+
+
+                    </dd>
+                }
+                @if (Model.customer.IsSuspended == true)
+                {
+                    <dd>
+                        <hr />
+
+                        Your Account is Suspended  From  @Html.DisplayFor(model => model.customer.StartDate) To @Html.DisplayFor(model => model.customer.EndDate)
+
+
+                    </dd>
+
+                    @Html.ActionLink("Activate Again", "ActivateAccount", new { id = Model.customer.Id })
+
+                
+
+                } 
+
+            </dl>
+
+
+        </div>
+
        
+        <div class="col-6">
+            <h5> Extra PickUps History</h5>
+            @foreach (var item in Model.extraPickups)
+            {
+            <table>
+                <tr>
+                    <td>
+                     From   @Html.DisplayFor(modelItem => item.ExtraPickUp_start) To @Html.DisplayFor(modelItem => item.ExtraPickUp_end)
 
-        <dd>
-          Full Name:  @Html.DisplayFor(model => model.customer.FirstName)  @Html.DisplayFor(model => model.customer.LastName)
+                    </td>
+                    <td>
+                    </td>
+                   
+                    
+                </tr>
+            </table>
+            }
+            @Html.ActionLink("New Request", "ExtraPickUp", "ExtraPickups", null, htmlAttributes: new { @class = "btn btn-primary" })
 
-        </dd>
-
+        </div>
         
-
-        <dd>
-            Address: @Html.DisplayFor(model => model.customer.Street) ,@Html.DisplayFor(model => model.customer.City) @Html.DisplayFor(model => model.customer.State) @Html.DisplayFor(model => model.customer.Zip)
-
-        </dd>
-
-
-        <dd>
-        </dd>
-
-       
-
-      
-
-        <dd>
-            Your Weekly PickUp Day :  @Html.DisplayFor(model => model.customer.WeeklyPickUpDay)   @Html.ActionLink("Edit", "EditWeeklyPickup", new { id = Model.customer.Id })
-
-        </dd>
-
-        
-
-
-        <dd>
-           Your Balance : $ @Html.DisplayFor(model => model.customer.Balance) <div class="btn btn-primary"> Pay Now </div>
-        </dd>
-
-
-    </dl>
+        </div>
 </div>
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>

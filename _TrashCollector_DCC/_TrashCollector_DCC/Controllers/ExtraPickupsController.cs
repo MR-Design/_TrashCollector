@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using _TrashCollector_DCC.Models;
+using Microsoft.AspNet.Identity;
 
 namespace _TrashCollector_DCC.Controllers
 {
@@ -14,12 +15,43 @@ namespace _TrashCollector_DCC.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: ExtraPickups
-        public ActionResult Index()
+
+
+        // GET: ExtraPickups/Create
+        public ActionResult ExtraPickUp(int? id)
         {
-            var extraPickups = db.ExtraPickups.Include(e => e.Customers);
-            return View(extraPickups.ToList());
+            ExtraPickup extraPickup = db.ExtraPickups.Find(id);
+
+            return View();
         }
+
+        // POST: ExtraPickups/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ExtraPickUp([Bind(Include = "Id,CustomerId,ExtraPickUp_start,ExtraPickUp_end")] ExtraPickup extraPickup, string value)
+        {
+            if (ModelState.IsValid)
+            {
+                var currentCustomer = User.Identity.GetUserId();
+                extraPickup.CustomerId = currentCustomer; db.ExtraPickups.Add(extraPickup);
+                db.SaveChanges();
+                return RedirectToAction("Account", "Customers");
+            }
+
+            return View(extraPickup);
+        }
+
+
+
+
+        // GET: ExtraPickups
+        //public ActionResult Index()
+        //{
+        //    var extraPickups = db.ExtraPickups.Include(e => e.Customers);
+        //    return View(extraPickups.ToList());
+        //}
 
         // GET: ExtraPickups/Details/5
         public ActionResult Details(int? id)
@@ -52,6 +84,9 @@ namespace _TrashCollector_DCC.Controllers
         {
             if (ModelState.IsValid)
             {
+              //  extraPickup.CustomerId = db.Customers.Select(c => c.Id).SingleOrDefault();
+             //   extraPickup.Id = extraPickup.CustomerId;
+
                 db.ExtraPickups.Add(extraPickup);
                 db.SaveChanges();
                 return RedirectToAction("Index");
