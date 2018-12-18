@@ -35,7 +35,7 @@ namespace _TrashCollector_DCC.Controllers
         [HttpPost]
         public ActionResult Index(string search, EmployeeViewModel view)
         {
-           
+
             view = new EmployeeViewModel()
             {
                 customer = new Customer(),
@@ -43,9 +43,11 @@ namespace _TrashCollector_DCC.Controllers
                 employee = new Employee()
 
             };
+            var employeeZip = db.Employees.Select(x => x.Zip).SingleOrDefault();
+
             if (!String.IsNullOrEmpty(search))
             {
-                view.customers = db.Customers.Where(s => s.WeeklyPickUpDay.Contains(search)).ToList(); 
+                view.customers = db.Customers.Where(s => s.WeeklyPickUpDay.Contains(search) && s.Zip== employeeZip).ToList(); 
             }
 
            
