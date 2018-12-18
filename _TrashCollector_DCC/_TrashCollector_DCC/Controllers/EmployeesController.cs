@@ -41,7 +41,7 @@ namespace _TrashCollector_DCC.Controllers
             if (ModelState.IsValid)
             {
              
-                if (customer.WeeklyPickUpDayCompleted == true)
+                if (customer.WeeklyPickUpDayCompleted == true && customer.IsSuspended == false)
                 {
                     customer.Balance += 20;
                     db.Entry(customer).State = EntityState.Modified;

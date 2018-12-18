@@ -132,6 +132,7 @@
             </div>
         </div>
     </div>
+    @if(Model.IsSuspended == false) { 
     <div class="form-group">
         Mark As Complited
         <div class="col-md-10">
@@ -146,6 +147,10 @@
             <input type="submit" value="Save" class="btn btn-default" />
         </div>
     </div>
+    } else
+    {
+        <div class="bnt btn-danger"> This Account Is suspended</div>
+    }
 </div>
 }
 
