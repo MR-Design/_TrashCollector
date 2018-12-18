@@ -14,9 +14,31 @@ namespace _TrashCollector_DCC.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+
         // GET: Employees
-        public ActionResult Index()
+        public ActionResult Index(EmployeeViewModel view)
         {
+            view = new EmployeeViewModel()
+            {
+                customer = new Customer(),
+                customers = new List<Customer>(),
+                employee = new Employee()
+
+            };
+            var employeeZip = db.Employees.Select(x => x.Zip).SingleOrDefault();
+            // var WeeklyPickUp = db.Customers.Select(x => x.WeeklyPickUpDay).SingleOrDefault();
+
+            var Today = DateTime.Now.DayOfWeek.ToString();
+
+                view.customers = db.Customers.Where(x => x.Zip == employeeZip && x.WeeklyPickUpDay == Today).ToList();
+            
+            return View(view);
+        }
+
+        // GET: Employees
+        public ActionResult DefaultIndex()
+        {
+
             return View(db.Employees.ToList());
         }
 

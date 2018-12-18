@@ -14,6 +14,9 @@ namespace _TrashCollector_DCC.Controllers
     public class CustomersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
+
+
         // GET: Customers/Delete/5
         public ActionResult ActivateAccount(int? id)
         {
