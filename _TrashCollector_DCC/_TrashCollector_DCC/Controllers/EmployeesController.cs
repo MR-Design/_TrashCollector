@@ -15,7 +15,44 @@ namespace _TrashCollector_DCC.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        // GET: Customers/Edit/5
+        public ActionResult Charge(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = db.Customers.Find(id);
 
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
+
+        // POST: Customers/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Charge([Bind(Include = "Id,FirstName,LastName,Street,City,State,Zip,Lat,Lng,WeeklyPickUpDay,WeeklyPickUpDayCompleted,Balance,StartDate,EndDate,IsSuspended,UserId")] Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+             
+                if (customer.WeeklyPickUpDayCompleted == true)
+                {
+                    customer.Balance += 20;
+                    db.Entry(customer).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                db.Entry(customer).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(customer);
+        }
         // GET: Employees
         public ActionResult Index(EmployeeViewModel view)
         {
