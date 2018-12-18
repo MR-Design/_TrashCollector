@@ -26,12 +26,30 @@ namespace _TrashCollector_DCC.Controllers
 
             };
             var employeeZip = db.Employees.Select(x => x.Zip).SingleOrDefault();
-            // var WeeklyPickUp = db.Customers.Select(x => x.WeeklyPickUpDay).SingleOrDefault();
-
             var Today = DateTime.Now.DayOfWeek.ToString();
-
-                view.customers = db.Customers.Where(x => x.Zip == employeeZip && x.WeeklyPickUpDay == Today).ToList();
+            view.customers = db.Customers.Where(x => x.Zip == employeeZip && x.WeeklyPickUpDay == Today).ToList();
             
+            return View(view);
+        }
+
+        [HttpPost]
+        public ActionResult Index(string search, EmployeeViewModel view)
+        {
+           
+            view = new EmployeeViewModel()
+            {
+                customer = new Customer(),
+                customers = new List<Customer>(),
+                employee = new Employee()
+
+            };
+            if (!String.IsNullOrEmpty(search))
+            {
+                view.customers = db.Customers.Where(s => s.WeeklyPickUpDay.Contains(search)).ToList(); 
+            }
+
+           
+
             return View(view);
         }
 
