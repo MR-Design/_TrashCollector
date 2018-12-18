@@ -4,233 +4,286 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
 
+
+<hr />
+<dl class="dl-horizontal">
+    <dt>
+        @Html.DisplayNameFor(model => model.FirstName)    :     @Html.DisplayFor(model => model.FirstName)
+
+    </dt>
+
+    <dd>
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.LastName)    :     @Html.DisplayFor(model => model.LastName)
+
+    </dt>
+
+    <dd>
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Street)     :    @Html.DisplayFor(model => model.Street)
+
+    </dt>
+
+    <dd>
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.City)    :     @Html.DisplayFor(model => model.City)
+
+    </dt>
+
+    <dd>
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.State)  :       @Html.DisplayFor(model => model.State)
+
+    </dt>
+
+    <dd>
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Zip)  :       @Html.DisplayFor(model => model.Zip)
+
+    </dt>
+
+    <dd>
+    </dd>
+
+
+
+    <dt>
+        Weekly PickUp Day :        @Html.DisplayFor(model => model.WeeklyPickUpDay)
+
+    </dt>
+
+    <dd>
+    </dd>
+
+</dl>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <h4>Customer</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.Id)
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
 
-    <div class="form-group" style="display:none;">
-        @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group" style="display:none;">
-        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group" style="display:none;">
-        @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group" style="display:none;">
-        @Html.LabelFor(model => model.Street, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Street, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Street, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group" style="display:none;">
-        @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group" style="display:none;">
-        @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group" style="display:none;">
-        @Html.LabelFor(model => model.Zip, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Zip, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Zip, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group" style="display:none;">
-        @Html.LabelFor(model => model.Lat, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Lat, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Lat, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group" style="display:none;">
-        @Html.LabelFor(model => model.Lng, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Lng, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Lng, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group" style="display:none;">
-        @Html.LabelFor(model => model.WeeklyPickUpDay, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.WeeklyPickUpDay, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.WeeklyPickUpDay, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-
-
-    <div class="form-group" style="display:none;">
-        @Html.LabelFor(model => model.Balance, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Balance, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Balance, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group" style="display:none;">
-        @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group" style="display:none;">
-        @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <div class="form-group" style="display:none;">
-        @Html.LabelFor(model => model.IsSuspended, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="checkbox">
-                @Html.EditorFor(model => model.IsSuspended)
-                @Html.ValidationMessageFor(model => model.IsSuspended, "", new { @class = "text-danger" })
+        <div class="form-group" style="display:none;">
+            @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
             </div>
         </div>
-    </div>
-    @if(Model.IsSuspended == false) { 
-    <div class="form-group">
-        Mark As Complited
-        <div class="col-md-10">
-            <div class="checkbox">
-                @Html.EditorFor(model => model.WeeklyPickUpDayCompleted)
-                @Html.ValidationMessageFor(model => model.WeeklyPickUpDayCompleted, "", new { @class = "text-danger" })
+
+        <div class="form-group" style="display:none;">
+            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
             </div>
         </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
+
+        <div class="form-group" style="display:none;">
+            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
         </div>
+
+        <div class="form-group" style="display:none;">
+            @Html.LabelFor(model => model.Street, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Street, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Street, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" style="display:none;">
+            @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" style="display:none;">
+            @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" style="display:none;">
+            @Html.LabelFor(model => model.Zip, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Zip, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Zip, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" style="display:none;">
+            @Html.LabelFor(model => model.Lat, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Lat, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Lat, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" style="display:none;">
+            @Html.LabelFor(model => model.Lng, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Lng, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Lng, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" style="display:none;">
+            @Html.LabelFor(model => model.WeeklyPickUpDay, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.WeeklyPickUpDay, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.WeeklyPickUpDay, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group" style="display:none;">
+            @Html.LabelFor(model => model.Balance, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Balance, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Balance, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" style="display:none;">
+            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" style="display:none;">
+            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" style="display:none;">
+            @Html.LabelFor(model => model.IsSuspended, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.IsSuspended)
+                    @Html.ValidationMessageFor(model => model.IsSuspended, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        @if (Model.IsSuspended == false)
+        {
+            <div class="form-group">
+                <div class="col-md-10">
+
+                    <div class="checkbox">
+                        Pick Up  Statu
+
+                        @Html.EditorFor(model => model.WeeklyPickUpDayCompleted)
+                        @Html.ValidationMessageFor(model => model.WeeklyPickUpDayCompleted, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Completed" class="btn btn-default" />
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="bnt btn-danger"> This Account Is suspended</div>
+        }
     </div>
-    } else
-    {
-        <div class="bnt btn-danger"> This Account Is suspended</div>
-    }
-</div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-<h2>Details</h2>
 
- 
-        <h4>Customer</h4>
-        <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.FirstName)
-            </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.LastName)
-            </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.LastName)
-            </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Street)
-            </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Street)
-            </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.City)
-            </dt>
+@*AIzaSyDl9qCD8EsnTD2g4emQN7Ynm6D16zu00ow*@
+<style>
+    #map {
+        height: 25rem;
+        width: 70%;
+    }
+</style>
+<div id="map"></div>
 
-            <dd>
-                @Html.DisplayFor(model => model.City)
-            </dd>
+<body>
+    <script>
+         function initMap() {
 
-            <dt>
-                @Html.DisplayNameFor(model => model.State)
-            </dt>
+        geocodeAddress("@(String.Format("{0}, {1}, {2} {3}", Model.Street, Model.City+" ", Model.State+" ", Model.Zip))");
 
-            <dd>
-                @Html.DisplayFor(model => model.State)
-            </dd>
+    }
+        function geocodeAddress(address) {
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Zip)
-            </dt>
+            var geocoder = new google.maps.Geocoder();
 
-            <dd>
-                @Html.DisplayFor(model => model.Zip)
-            </dd>
+            geocoder.geocode({ 'address': address }, function (results, status) {
 
-         
+                if (status == google.maps.GeocoderStatus.OK) {
+                    var latitude = results[0].geometry.location.lat();
+                    var longitude = results[0].geometry.location.lng();
+                }
 
-            <dt>
-                @Html.DisplayNameFor(model => model.WeeklyPickUpDay)
-            </dt>
+                console.log(latitude);
+                console.log(longitude);
 
-            <dd>
-                @Html.DisplayFor(model => model.WeeklyPickUpDay)
-            </dd>
+                var myLatLng = { lat: latitude, lng: longitude };
 
-          
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 13,
+                    center: myLatLng
+                });
 
-          
+                var marker = new google.maps.Marker({
+                    position: myLatLng,
+                    map: map,
+                    title: 'Customer Map Details!'
+                });
 
-        
+            });
 
-   
 
-    </dl>
+        }
+
+
+
+    </script>
+
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap">
+    </script>
+
+</body>

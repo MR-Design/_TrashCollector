@@ -26,6 +26,7 @@ namespace _TrashCollector_DCC
             {
                 ConfigureAuth(app);
                 createRolesandUsers();
+
             }
 
 

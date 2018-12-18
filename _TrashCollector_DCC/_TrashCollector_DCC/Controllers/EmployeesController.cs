@@ -61,7 +61,9 @@ namespace _TrashCollector_DCC.Controllers
             {
                 customer = new Customer(),
                 customers = new List<Customer>(),
-                employee = new Employee()
+                employee = new Employee(),
+                extraPickup = new ExtraPickup(),
+                extraPickups = new List<ExtraPickup>()
 
             };
             var currentCustomer = User.Identity.GetUserId();
@@ -70,8 +72,11 @@ namespace _TrashCollector_DCC.Controllers
             var employeeZip = db.Employees.Select(x => x.Zip).SingleOrDefault();
             var Today = DateTime.Now.DayOfWeek.ToString();
             view.customers = db.Customers.Where(x => x.Zip == employeeZip && x.WeeklyPickUpDay == Today).ToList();
-            
-            return View(view);
+            //        var query =
+            // from t1 in myTABLE1List // List<TABLE_1>
+            //join t2 in myTABLE1List
+            //   on new { t1.ColumnA, t1.ColumnB } equals new { t2.ColumnA, t2.ColumnB }
+             return View(view);
         }
 
         [HttpPost]

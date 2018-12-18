@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -42,6 +43,5 @@ namespace _TrashCollector_DCC.Models
         [Display(Name = "End Date")]
         public DateTime? EndDate { get; set; }
         public bool IsSuspended { get; set; }
-
     }
 }
