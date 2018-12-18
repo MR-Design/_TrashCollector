@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using _TrashCollector_DCC.Models;
+using Microsoft.AspNet.Identity;
 
 namespace _TrashCollector_DCC.Controllers
 {
@@ -18,6 +19,7 @@ namespace _TrashCollector_DCC.Controllers
         // GET: Employees
         public ActionResult Index(EmployeeViewModel view)
         {
+          
             view = new EmployeeViewModel()
             {
                 customer = new Customer(),
@@ -25,6 +27,9 @@ namespace _TrashCollector_DCC.Controllers
                 employee = new Employee()
 
             };
+            var currentCustomer = User.Identity.GetUserId();
+            view.employee.UserId = currentCustomer;
+
             var employeeZip = db.Employees.Select(x => x.Zip).SingleOrDefault();
             var Today = DateTime.Now.DayOfWeek.ToString();
             view.customers = db.Customers.Where(x => x.Zip == employeeZip && x.WeeklyPickUpDay == Today).ToList();
@@ -90,6 +95,8 @@ namespace _TrashCollector_DCC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Email,Street,City,State,Zip,Lat,Lng")] Employee employee)
         {
+            var currentCustomer = User.Identity.GetUserId();
+            employee.UserId = currentCustomer;
             if (ModelState.IsValid)
             {
                 db.Employees.Add(employee);
