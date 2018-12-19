@@ -27,8 +27,7 @@ namespace _TrashCollector_DCC.Models
         public string City { get; set; }
         public string State { get; set; }
         public string Zip { get; set; }
-        public string Lat { get; set; }
-        public string Lng { get; set; }
+      
 
         [Display(Name = "Select your weekly pickup day")]
         public string WeeklyPickUpDay { get; set; }
@@ -43,5 +42,19 @@ namespace _TrashCollector_DCC.Models
         [Display(Name = "End Date")]
         public DateTime? EndDate { get; set; }
         public bool IsSuspended { get; set; }
+
+
+
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Enter Date Please")]
+        public DateTime? ExtraPickUp { get; set; }
+
+
+        public string ExtraPick { get; set; }
+
+        public bool ExtraPickUpComleted { get; set; }
+        public double? Fee { get; set; }
+
+
     }
 }

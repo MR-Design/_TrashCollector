@@ -63,6 +63,18 @@
 
     </dt>
 
+    @if (Model.ExtraPick == "Extra Pickup ")
+    {
+        <dt>
+
+            this Customer Requested an extra Pick up for this day
+        </dt>
+        <dt>
+
+            @Html.DisplayFor(model => model.ExtraPickUp)
+        </dt>
+
+    }
     <dd>
     </dd>
 
@@ -133,21 +145,8 @@
             </div>
         </div>
 
-        <div class="form-group" style="display:none;">
-            @Html.LabelFor(model => model.Lat, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Lat, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Lat, "", new { @class = "text-danger" })
-            </div>
-        </div>
+     
 
-        <div class="form-group" style="display:none;">
-            @Html.LabelFor(model => model.Lng, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Lng, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Lng, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
         <div class="form-group" style="display:none;">
             @Html.LabelFor(model => model.WeeklyPickUpDay, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -283,7 +282,6 @@
     </script>
 
     <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap">
     </script>
 
 </body>

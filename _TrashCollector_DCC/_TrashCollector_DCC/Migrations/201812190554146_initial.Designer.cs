@@ -7,13 +7,13 @@ namespace _TrashCollector_DCC.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class EditedStartandEndingDateforExtraPickUp : IMigrationMetadata
+    public sealed partial class initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(EditedStartandEndingDateforExtraPickUp));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "201812150111257_Edited Start and Ending Date for Extra Pick Up"; }
+            get { return "201812190554146_initial"; }
         }
         
         string IMigrationMetadata.Source

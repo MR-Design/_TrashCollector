@@ -13,7 +13,6 @@ namespace _TrashCollector_DCC.Models
         public Employee employee { get; set; }
         public List<Employee> employees { get; set; }
 
-        public ExtraPickup extraPickup { get; set; }
-        public List<ExtraPickup> extraPickups { get; set; }
+    
     }
 }

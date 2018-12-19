@@ -62,21 +62,24 @@ namespace _TrashCollector_DCC.Controllers
                 customer = new Customer(),
                 customers = new List<Customer>(),
                 employee = new Employee(),
-                extraPickup = new ExtraPickup(),
-                extraPickups = new List<ExtraPickup>()
+        
 
             };
             var currentCustomer = User.Identity.GetUserId();
             view.employee.UserId = currentCustomer;
-
+        
             var employeeZip = db.Employees.Select(x => x.Zip).SingleOrDefault();
             var Today = DateTime.Now.DayOfWeek.ToString();
+
             view.customers = db.Customers.Where(x => x.Zip == employeeZip && x.WeeklyPickUpDay == Today).ToList();
-            //        var query =
-            // from t1 in myTABLE1List // List<TABLE_1>
-            //join t2 in myTABLE1List
-            //   on new { t1.ColumnA, t1.ColumnB } equals new { t2.ColumnA, t2.ColumnB }
-             return View(view);
+            if(view.customer.ExtraPick == "Extra Pickup ")
+            {
+                var thisDay = view.customer.ExtraPickUp.Value.DayOfWeek.ToString();
+                view.customers = db.Customers.Where(x => x.Zip == employeeZip && x.WeeklyPickUpDay == thisDay).ToList();
+
+            }
+
+            return View(view);
         }
 
         [HttpPost]
@@ -216,3 +219,14 @@ namespace _TrashCollector_DCC.Controllers
         }
     }
 }
+//Employees Index
+//  if (view.customer.ExtraPick == 0)
+//            {
+//                view.customers = db.Customers.Where(x => x.Zip == employeeZip && x.WeeklyPickUpDay == Today).ToList();
+
+//            }else
+//            {
+//                var thisDay = view.customer.ExtraPickUp.Value.DayOfWeek.ToString();
+//view.customers = db.Customers.Where(x => x.Zip == employeeZip && x.WeeklyPickUpDay == thisDay).ToList();
+
+//            }

@@ -26,7 +26,6 @@ namespace _TrashCollector_DCC.Models
 
         public string State { get; set; }
         public string Zip { get; set; }
-        public string Lat { get; set; }
-        public string Lng { get; set; }
+   
     }
 }

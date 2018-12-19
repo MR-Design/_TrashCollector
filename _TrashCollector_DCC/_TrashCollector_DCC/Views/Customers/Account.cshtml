@@ -47,7 +47,14 @@
 
                 <dd>
 
-                    Your Balance :$ @Html.DisplayFor(model => model.customer.Balance) <div class="btn btn-primary"> Pay Now </div>
+                    Current Balance :$ @Html.DisplayFor(model => model.customer.Balance)
+                    @if (Model.customer.Balance > 0)
+                    {
+                        @Html.ActionLink("Pay", "Pay", new { id = Model.customer.Id }, htmlAttributes: new { @class = "btn btn-primary" })
+
+                    }
+
+
                 </dd>
 
 
@@ -75,36 +82,24 @@
 
                     @Html.ActionLink("Activate Again", "ActivateAccount", new { id = Model.customer.Id })
 
-                
 
-                } 
+
+                }
 
             </dl>
 
 
         </div>
+        @if (Model.customer.ExtraPick == "Extra Pickup ")
+        {
+            <p> Pendind Request </p>
 
-       
-        <div class="col-6">
-            <h5> Extra PickUps History</h5>
-            @foreach (var item in Model.extraPickups)
-            {
-            <table>
-                <tr>
-                    <td>
-                     From   @Html.DisplayFor(modelItem => item.ExtraPickUp_start) To @Html.DisplayFor(modelItem => item.ExtraPickUp_end)
+            <p> for :</p> @Html.DisplayFor(model => model.customer.ExtraPickUp)
 
-                    </td>
-                    <td>
-                    </td>
-                   
-                    
-                </tr>
-            </table>
-            }
-            @Html.ActionLink("New Request", "ExtraPickUp", "ExtraPickups", null, htmlAttributes: new { @class = "btn btn-primary" })
+        }
 
-        </div>
-        
-        </div>
+        @Html.ActionLink("Request New Pick Up", "ExtraPickUp", new { id = Model.customer.Id }, htmlAttributes: new { @class = "btn btn-primary" })
+
+
+    </div>
 </div>

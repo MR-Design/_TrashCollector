@@ -15,7 +15,32 @@ namespace _TrashCollector_DCC.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        // GET: Customers/Delete/5
+        public ActionResult Pay(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = db.Customers.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
 
+        // POST: Customers/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Pay(int id)
+        {
+            Customer customer = db.Customers.Find(id);
+            customer.Balance = 0;
+
+            db.Entry(customer).State = EntityState.Modified; db.SaveChanges();
+            return RedirectToAction("Account", "Customers");
+        }
 
         // GET: Customers/Delete/5
         public ActionResult ActivateAccount(int? id)
@@ -123,10 +148,46 @@ namespace _TrashCollector_DCC.Controllers
                 customer.UserId = currentCustomer;
                 db.Entry(customer).State = EntityState.Modified;
                 db.SaveChanges();
+                return RedirectToAction("Account", "Customers");
+            }
+            return View(customer);
+        }
+
+
+        // GET: Customers/Edit/5
+        public ActionResult ExtraPickUp(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = db.Customers.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
+
+        // POST: Customers/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ExtraPickUp([Bind(Include = "Id,FirstName,LastName,Street,City,State,Zip,Lat,Lng,WeeklyPickUpDay,WeeklyPickUpDayCompleted,Balance,StartDate,EndDate,IsSuspended,UserId,ExtraPickUp,ExtraPickUpComleted,Fee")] Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                var currentCustomer = User.Identity.GetUserId();
+                customer.UserId = currentCustomer;
+                customer.ExtraPick = "Extra Pickup ";
+                db.Entry(customer).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(customer);
         }
+
 
         // GET: Customers/Edit/5
         public ActionResult EditWeeklyPickup(int? id)
@@ -195,7 +256,7 @@ namespace _TrashCollector_DCC.Controllers
             return View();
         }
         // GET: Account/Details/5
-        public ActionResult Account(CustomerAccountViewModel view, ExtraPickup extraPickup)
+        public ActionResult Account(CustomerAccountViewModel view)
         {
              view = new CustomerAccountViewModel()
             {
@@ -204,7 +265,7 @@ namespace _TrashCollector_DCC.Controllers
 
         };
             var currentUser = User.Identity.GetUserId();
-            view.extraPickups = db.ExtraPickups.Where(e => e.CustomerId == currentUser).ToList();
+            //view.extraPickups = db.ExtraPickups.Where(e => e.CustomerId == currentUser).ToList();
 
 
             Customer customer = db.Customers.Where(s => s.UserId == currentUser).SingleOrDefault();
@@ -212,12 +273,16 @@ namespace _TrashCollector_DCC.Controllers
             var customers =  db.Customers
                 .Include(r => r.ApplicationUser)
                 .FirstOrDefault(m => m.UserId == currentUser);
+
+
             if (customer == null)
             {
                 return HttpNotFound();
             }
             return View(view);
         }
+
+
 
         // POST: Customers/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

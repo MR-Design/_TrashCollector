@@ -55,9 +55,16 @@
     <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp, Version=105.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.0.1\lib\net4\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Stripe.net, Version=21.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stripe.net.21.7.0\lib\net45\Stripe.net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
@@ -212,8 +219,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
-    <Compile Include="Controllers\ExtraPickupsController.cs" />
-    <Compile Include="Controllers\ExtraPickupsSafeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
@@ -221,29 +226,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201812142225367_Initial.cs" />
-    <Compile Include="Migrations\201812142225367_Initial.Designer.cs">
-      <DependentUpon>201812142225367_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201812142244444_Application UserId.cs" />
-    <Compile Include="Migrations\201812142244444_Application UserId.Designer.cs">
-      <DependentUpon>201812142244444_Application UserId.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201812150111257_Edited Start and Ending Date for Extra Pick Up.cs" />
-    <Compile Include="Migrations\201812150111257_Edited Start and Ending Date for Extra Pick Up.Designer.cs">
-      <DependentUpon>201812150111257_Edited Start and Ending Date for Extra Pick Up.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201812152323023_sss.cs" />
-    <Compile Include="Migrations\201812152323023_sss.Designer.cs">
-      <DependentUpon>201812152323023_sss.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201812180029563_sss1.cs" />
-    <Compile Include="Migrations\201812180029563_sss1.Designer.cs">
-      <DependentUpon>201812180029563_sss1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201812180228079_sss2.cs" />
-    <Compile Include="Migrations\201812180228079_sss2.Designer.cs">
-      <DependentUpon>201812180228079_sss2.cs</DependentUpon>
+    <Compile Include="Migrations\201812190554146_initial.cs" />
+    <Compile Include="Migrations\201812190554146_initial.Designer.cs">
+      <DependentUpon>201812190554146_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -251,7 +236,6 @@
     <Compile Include="Models\CustomerAccountViewModel.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\EmployeeViewModel.cs" />
-    <Compile Include="Models\ExtraPickup.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\RoleName.cs" />
@@ -273,6 +257,7 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Content\appsettings.json" />
     <None Include="Scripts\jquery-3.3.1-vsdoc.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -357,15 +342,11 @@
     <Content Include="Views\ExtraPickupsSafe\Index.cshtml" />
     <Content Include="Views\Customers\Account.cshtml" />
     <Content Include="Views\Customers\EditWeeklyPickup.cshtml" />
-    <Content Include="Views\ExtraPickups\ExtraPickUp.cshtml" />
-    <Content Include="Views\ExtraPickups\Delete.cshtml" />
-    <Content Include="Views\ExtraPickups\Details.cshtml" />
-    <Content Include="Views\ExtraPickups\Edit.cshtml" />
-    <Content Include="Views\ExtraPickups\Index.cshtml" />
-    <Content Include="Views\ExtraPickups\Create.cshtml" />
     <Content Include="Views\Customers\SuspendAcount.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
     <Content Include="Views\Employees\Charge.cshtml" />
+    <Content Include="Views\Customers\Pay.cshtml" />
+    <Content Include="Views\Customers\ExtraPickUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -382,23 +363,8 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201812142225367_Initial.resx">
-      <DependentUpon>201812142225367_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201812142244444_Application UserId.resx">
-      <DependentUpon>201812142244444_Application UserId.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201812150111257_Edited Start and Ending Date for Extra Pick Up.resx">
-      <DependentUpon>201812150111257_Edited Start and Ending Date for Extra Pick Up.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201812152323023_sss.resx">
-      <DependentUpon>201812152323023_sss.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201812180029563_sss1.resx">
-      <DependentUpon>201812180029563_sss1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201812180228079_sss2.resx">
-      <DependentUpon>201812180228079_sss2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201812190554146_initial.resx">
+      <DependentUpon>201812190554146_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
