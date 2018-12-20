@@ -4,102 +4,117 @@
     ViewBag.Title = "Details";
 }
 
+
 <div class="container">
-    <h4>Dashboard </h4>
-    <hr />
-    <div class="row">
 
-        <div class="col-6">
+    <div class="narrow text-center padding">
+        <div class="container">
 
-            <dl class="dl-horizontal">
-
-
-                <dd>
-                    Full Name:  @Html.DisplayFor(model => model.customer.FirstName)  @Html.DisplayFor(model => model.customer.LastName)
-
-                </dd>
-
-
-
-                <dd>
-
-                    Address: @Html.DisplayFor(model => model.customer.Street) ,@Html.DisplayFor(model => model.customer.City) @Html.DisplayFor(model => model.customer.State) @Html.DisplayFor(model => model.customer.Zip)
-
-                </dd>
-
-
-                <dd>
-                </dd>
-
-
-
-
-
-                <dd>
-
-
-                    Your Weekly PickUp Day :  @Html.DisplayFor(model => model.customer.WeeklyPickUpDay)   @Html.ActionLink("Edit", "EditWeeklyPickup", new { id = Model.customer.Id })
-
-                </dd>
-
-
-
-
-                <dd>
-
-                    Current Balance :$ @Html.DisplayFor(model => model.customer.Balance)
-                    @if (Model.customer.Balance > 0)
-                    {
-                        @Html.ActionLink("Pay", "Pay", new { id = Model.customer.Id }, htmlAttributes: new { @class = "btn btn-primary" })
-
-                    }
-
-
-                </dd>
-
-
-                @if (Model.customer.IsSuspended == false)
-                {
-
-                    <dd>
-                        <hr />
-
-                        Are You Away From Home?  @Html.ActionLink("Suspend Account", "SuspendAcount", new { id = Model.customer.Id })
-
-
-
-                    </dd>
-                }
-                @if (Model.customer.IsSuspended == true)
-                {
-                    <dd>
-                        <hr />
-
-                        Your Account is Suspended  From  @Html.DisplayFor(model => model.customer.StartDate) To @Html.DisplayFor(model => model.customer.EndDate)
-
-
-                    </dd>
-
-                    @Html.ActionLink("Activate Again", "ActivateAccount", new { id = Model.customer.Id })
-
-
-
-                }
-
-            </dl>
+            <h3 class="narrow"> Hello, </h3> <p class="lead"> @Html.DisplayFor(model => model.customer.FirstName)  @Html.DisplayFor(model => model.customer.LastName)</p><br />
 
 
         </div>
-        @if (Model.customer.ExtraPick == "Extra Pickup ")
-        {
-            <p> Pendind Request </p>
 
-            <p> for :</p> @Html.DisplayFor(model => model.customer.ExtraPickUp)
-
-        }
-
-        @Html.ActionLink("Request New Pick Up", "ExtraPickUp", new { id = Model.customer.Id }, htmlAttributes: new { @class = "btn btn-primary" })
 
 
     </div>
 </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="narrow text-center padding">
+                <h5 class="narrow"> Weekly PickUp Day  </h5>
+                <p class="lead narrow">
+                    @Html.DisplayFor(model => model.customer.WeeklyPickUpDay)
+                </p>
+                @Html.ActionLink("Edit", "EditWeeklyPickup", new { id = Model.customer.Id }, htmlAttributes: new { @class = "btn btn-outline-warning" })
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="narrow text-center padding">
+                <h5 class="narrow">
+                    Current Balance
+                </h5>
+                <p class="lead narrow">
+                    $ @Html.DisplayFor(model => model.customer.Balance)
+                </p>
+                @if (Model.customer.Balance > 0)
+                {
+                    @Html.ActionLink("Pay", "Pay", new { id = Model.customer.Id }, htmlAttributes: new { @class = "btn btn-outline-primary" })
+
+                }
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="narrow text-center padding">
+                <h5 class="narrow padding">
+                    I have Extra trash!
+                </h5>
+                <p class="lead narrow">
+                    @Html.ActionLink("Request New Pick Up", "ExtraPickUp", new { id = Model.customer.Id }, htmlAttributes: new { @class = "btn btn-outline-primary" })
+                </p>
+                @if (Model.customer.ExtraPick == "Extra Pickup ")
+                {
+                    <p class="lead narrow"> Pendind Request </p>
+                    <p class="lead "> @Html.DisplayFor(model => model.customer.ExtraPickUp) </p>
+
+
+                }
+            </div>
+        </div>
+
+        @if (Model.customer.IsSuspended == false)
+        {
+            <div class="col-md-3">
+                <div class="narrow text-center padding">
+                    <h5 class="narrow padding">
+                        I am Away From Home
+                    </h5>
+                    @Html.ActionLink("Suspend Account", "SuspendAcount", new { id = Model.customer.Id }, htmlAttributes: new { @class = "btn btn-outline-danger" })
+
+                </div>
+            </div>
+        }
+        @if (Model.customer.IsSuspended == true)
+        {
+            <div class="col-md-3">
+                <div class="narrow text-center padding">
+                    <h5 class="narrow">
+                        Your Account is Suspended
+                    </h5>
+
+                    @Html.DisplayFor(model => model.customer.StartDate) @Html.DisplayFor(model => model.customer.EndDate)
+
+
+
+                    @Html.ActionLink("Activate Again", "ActivateAccount", new { id = Model.customer.Id }, htmlAttributes: new { @class = "btn btn-outline-success" })
+
+                </div>
+            </div>
+
+        }
+
+    </div>
+   
+
+
+
+</div>
+
+<h5 class="narrow"> Address </h5> <p class="lead narrow"> @Html.DisplayFor(model => model.customer.Street) ,@Html.DisplayFor(model => model.customer.City) @Html.DisplayFor(model => model.customer.State) @Html.DisplayFor(model => model.customer.Zip)</p>
+
+
+<style>
+
+    .padding {
+        padding: 3rem 0;
+    }
+
+    .narrow {
+        width: 85%;
+        margin: 0 auto;
+        padding-top: 1rem;
+    }
+</style>
