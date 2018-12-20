@@ -8,16 +8,20 @@
 <div class="container">
 
     <div class="narrow text-center padding">
-        <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="narrow"> Hello, </h3> <p class="lead"> @Html.DisplayFor(model => model.customer.FirstName)  @Html.DisplayFor(model => model.customer.LastName)</p><br />
+            </div>
+            <div class="col-md-6">
 
-            <h3 class="narrow"> Hello, </h3> <p class="lead"> @Html.DisplayFor(model => model.customer.FirstName)  @Html.DisplayFor(model => model.customer.LastName)</p><br />
-
+                <h5 class="narrow"> Address </h5> <p class="lead narrow"> @Html.DisplayFor(model => model.customer.Street) ,@Html.DisplayFor(model => model.customer.City) @Html.DisplayFor(model => model.customer.State) @Html.DisplayFor(model => model.customer.Zip)</p>
+            </div>
 
         </div>
 
 
 
-    </div>
+        </div>
 </div>
 <div class="container">
     <div class="row">
@@ -97,13 +101,12 @@
         }
 
     </div>
-   
+
 
 
 
 </div>
 
-<h5 class="narrow"> Address </h5> <p class="lead narrow"> @Html.DisplayFor(model => model.customer.Street) ,@Html.DisplayFor(model => model.customer.City) @Html.DisplayFor(model => model.customer.State) @Html.DisplayFor(model => model.customer.Zip)</p>
 
 
 <style>
