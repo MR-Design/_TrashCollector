@@ -1,67 +1,22 @@
 ﻿@model _TrashCollector_DCC.Models.Customer
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Customer Details";
 }
 
 
+<div class="container">
+    <div class="narrow text-center padding">
+        <p class="lead"> @Html.DisplayNameFor(model => model.FirstName)    :     @Html.DisplayFor(model => model.FirstName)</p>
+        <p class="lead"> @Html.DisplayNameFor(model => model.LastName)    :     @Html.DisplayFor(model => model.LastName)</p>
+        <p class="lead">  @Html.DisplayFor(model => model.Street)  , @Html.DisplayFor(model => model.City)  @Html.DisplayFor(model => model.State) . @Html.DisplayFor(model => model.Zip)</p>
+        <p class="lead"> Weekly PickUp Day :  @Html.DisplayFor(model => model.WeeklyPickUpDay)</p>
 
-<hr />
-<dl class="dl-horizontal">
-    <dt>
-        @Html.DisplayNameFor(model => model.FirstName)    :     @Html.DisplayFor(model => model.FirstName)
+        
+    </div>
+ </div>
 
-    </dt>
-
-    <dd>
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.LastName)    :     @Html.DisplayFor(model => model.LastName)
-
-    </dt>
-
-    <dd>
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.Street)     :    @Html.DisplayFor(model => model.Street)
-
-    </dt>
-
-    <dd>
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.City)    :     @Html.DisplayFor(model => model.City)
-
-    </dt>
-
-    <dd>
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.State)  :       @Html.DisplayFor(model => model.State)
-
-    </dt>
-
-    <dd>
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.Zip)  :       @Html.DisplayFor(model => model.Zip)
-
-    </dt>
-
-    <dd>
-    </dd>
-
-
-
-    <dt>
-        Weekly PickUp Day :        @Html.DisplayFor(model => model.WeeklyPickUpDay)
-
-    </dt>
+   
 
     @if (Model.ExtraPick == "Extra Pickup ")
     {
@@ -75,17 +30,13 @@
         </dt>
 
     }
-    <dd>
-    </dd>
-
-</dl>
+   
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
@@ -193,22 +144,21 @@
         </div>
         @if (Model.IsSuspended == false)
         {
+        <div class="container text-center">
+          
+
             <div class="form-group">
-                <div class="col-md-10">
+                <div class="checkbox">
+                    <p> Check when you're done</p>
 
-                    <div class="checkbox">
-                        Pick Up  Statu
-
-                        @Html.EditorFor(model => model.WeeklyPickUpDayCompleted)
-                        @Html.ValidationMessageFor(model => model.WeeklyPickUpDayCompleted, "", new { @class = "text-danger" })
-                    </div>
+                    @Html.EditorFor(model => model.WeeklyPickUpDayCompleted)
+                    @Html.ValidationMessageFor(model => model.WeeklyPickUpDayCompleted, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-offset-2 ">
+                    <input type="submit" value="Completed" class="btn btn-outline-primary" />
                 </div>
             </div>
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Completed" class="btn btn-default" />
-                </div>
-            </div>
+        </div>
         }
         else
         {
@@ -233,7 +183,7 @@
 <style>
     #map {
         height: 25rem;
-        width: 70%;
+        width: 100%;
     }
 </style>
 <div id="map"></div>
@@ -283,5 +233,17 @@
 
     <script async defer
     </script>
+<style>
 
+    .padding {
+        padding: 3rem 0;
+    }
+    .narrow {
+        width: 85%;
+        margin: 0 auto;
+        padding-top: 1rem;
+    }
+
+   
+</style>
 </body>

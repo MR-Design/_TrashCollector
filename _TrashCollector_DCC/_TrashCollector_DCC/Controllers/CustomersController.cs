@@ -104,9 +104,8 @@ namespace _TrashCollector_DCC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Street,City,State,WeeklyPickUpDay,UserId")] Customer customer)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Street,City,State,Zip,WeeklyPickUpDay,UserId")] Customer customer)
         {
-            
             if (ModelState.IsValid)
             {
                 var currentCustomer = User.Identity.GetUserId();
@@ -140,7 +139,7 @@ namespace _TrashCollector_DCC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Street,City,State,Zip,Lat,Lng,WeeklyPickUpDay,WeeklyPickUpDayCompleted,Balance,StartDate,EndDate,IsSuspended,UserId")] Customer customer)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Street,City,State,Zip,WeeklyPickUpDay,WeeklyPickUpDayCompleted,Balance,StartDate,EndDate,IsSuspended,UserId")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -183,7 +182,7 @@ namespace _TrashCollector_DCC.Controllers
                 customer.ExtraPick = "Extra Pickup ";
                 db.Entry(customer).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Account", "Customers");
             }
             return View(customer);
         }
@@ -312,7 +311,7 @@ namespace _TrashCollector_DCC.Controllers
             Customer customer = db.Customers.Find(id);
             db.Customers.Remove(customer);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Account", "Customers");
         }
 
         protected override void Dispose(bool disposing)

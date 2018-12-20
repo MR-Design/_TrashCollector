@@ -49,7 +49,7 @@ namespace _TrashCollector_DCC.Controllers
                 }
                 db.Entry(customer).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Employees");
             }
             return View(customer);
         }
@@ -146,7 +146,7 @@ namespace _TrashCollector_DCC.Controllers
             {
                 db.Employees.Add(employee);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Employees");
             }
 
             return View(employee);
@@ -178,7 +178,7 @@ namespace _TrashCollector_DCC.Controllers
             {
                 db.Entry(employee).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Employees");
             }
             return View(employee);
         }
@@ -206,7 +206,7 @@ namespace _TrashCollector_DCC.Controllers
             Employee employee = db.Employees.Find(id);
             db.Employees.Remove(employee);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Employees");
         }
 
         protected override void Dispose(bool disposing)

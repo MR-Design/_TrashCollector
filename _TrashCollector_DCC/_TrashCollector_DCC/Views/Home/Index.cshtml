@@ -1,28 +1,63 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+@*<img src="~/Content/img/bg.jpg" class="img-fluid" alt="Responsive image">*@
 
-<div class="container-fluid">
-    <img src="https://www.downtownsac.org/wp-content/uploads/2016/07/nicholaswray.com-20121009-326.jpg" class="img-fluid" alt="Responsive image">
-
-
-</div>
-    <br>
-
-    <!-- The dots/circles -->
-    <div style="text-align:center">
-        <span class="dot" onclick="currentSlide(1)"></span>
-        <span class="dot" onclick="currentSlide(2)"></span>
-        <span class="dot" onclick="currentSlide(3)"></span>
-    </div>
-    <h1>P!K</h1>
-    <p class="lead">Order Today.</p>
-    <p><a href="#" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-
+@using _TrashCollector_DCC.Models
+@model LoginViewModel
+@{
+}
+<div class="container-fluid bg-main text-center ">
+   
 
     <div class="row">
-        <div class="col-md-4">
-            <h2>Getting started</h2>
+        <div class="container-fluid text-center col-md-3 log-in">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal col-12", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group ">
+                    <div class="text-center">
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="text-center">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                        <input type="submit" value="Log in" class="btn btn-outline-warning" />
+
+                
+                    @Html.ActionLink("Register as a new user", "Register", "Account", null, new { @class = "btn btn-outline-success" })
+               
+                @* Enable this once you have account confirmation enabled for password reset functionality
+                    <p>
+                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                    </p>*@
+            }
+        </div>
+
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</div>
+<br>
+
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <div class="heading">Getting started</div>
+            <div class="heading-underline"></div>
+
             <p>
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                 sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
@@ -31,32 +66,128 @@
 
 
             </p>
-            <p><a class="btn btn-default" href="#">Learn more &raquo;</a></p>
+            <p><div class="btn btn-outline-warning " href="#">Learn more &raquo;</div></p>
         </div>
-        <div class="col-md-4">
-            <h2>Get more </h2>
+        <div class="col-md-6 text-center">
+            <div class="heading">Getting started</div>
+            <div class="heading-underline"></div>
             <p>
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                culpa qui officia deserunt mollit anim id est laborum."
-            <p>
-                <a class="btn btn-default" href="#">Learn more &raquo;</a>
-            </p>
-        </div>
-        <div class="col-md-4">
-            <h2>First Month Free </h2>
-            <p>
+
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                 sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                 pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
                 culpa qui officia deserunt mollit anim id est laborum."
             </p>
-            <p><a class="btn btn-default" href="#">Learn more &raquo;</a></p>
+
+            <p>
+                <a class="btn btn-outline-warning" href="#">Learn more &raquo;</a>
+            </p>
+        </div>
+
+    </div>
+</div>
+<div class="container section">
+    <div class="row">
+        <div class="col-md-6">
+            <h3>
+                Highly Skilled Volunteers
+            </h3>
+            <p>
+                Through its program, TopVolunteer™, GetLance partners with leading nonprofits and NGOs around the world who need high-skilled talent for their volunteer initiatives. Members of the GetLance network are encouraged to offer their skills and experience to these projects, whether to solve a timely problem or to contribute on an ongoing basis.
+            </p>
+        </div>
+        <div class="col-md-6">
+            <img src="https://preview.ibb.co/erdq8p/Employee-1.jpg" alt="" />
         </div>
     </div>
- <style>
+    <div class="row">
+        <div class="col-md-6">
+            <img src="https://preview.ibb.co/cu76g9/Employee-2.jpg" alt="" />
+        </div>
+        <div class="col-md-6">
+            <h3>
+                Cutting-Edge Skill Development
+            </h3>
+            <p>
+                GetLance Academy hosts regular, rigorous learning sessions for the most in-demand skills. By presenting our elite, experienced network with ongoing opportunities to update and elevate their portfolios, we are able to solve pressing talent shortages while ensuring success for dedicated participants.
+            </p>
+        </div>
+    </div>
+</div>
+
+<style>
+
+    .bg-main {
+        background-image: url("/Content/img/bg.jpg");
+        height: 680px; /* You must set a specified height */
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Do not repeat the image */
+        background-size: cover; /* Resize the background image to cover the entire container */
+    }
+
+    .heading-underline {
+        width: 3rem;
+        height: .2rem;
+        background-color: #C95332;
+        margin: 0 auto 2.9rem;
+    }
+
+    .heading {
+        color: #4F7CAC;
+        font-size: 1.5rem;
+        font-weight: 500;
+        text-align: center;
+        text-transform: uppercase;
+        margin-bottom: 4rem;
+        margin-top: 5rem;
+    }
 
 
-    
- </style>
+
+    .section .row {
+        margin-top: 7%;
+        margin-bottom: 10%;
+    }
+
+        .section .row .col-md-6 {
+            background: #f5f5f5;
+            margin-right: -2%;
+            padding: 5%;
+        }
+
+    .section h3 {
+        color: #004085;
+    }
+
+    .section p {
+        margin-top: 10%;
+        color: #545b62;
+    }
+
+    .section img {
+        width: 100%;
+    }
+
+    .btn {
+        margin-bottom: 5rem;
+        margin-top: 3rem;
+    }
+    .form-container {
+        padding-right: 20%;
+        padding-bottom: 20%;
+    }
+    .user {
+        color: #F1F7ED;
+        font-size:1.1rem;
+    }
+    .log-in{
+        padding-top:20%;
+    }
+</style>
+
+
+
+
+
+
+

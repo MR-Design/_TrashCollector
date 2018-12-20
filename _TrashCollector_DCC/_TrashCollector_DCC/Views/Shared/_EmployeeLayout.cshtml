@@ -3,38 +3,130 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+
+    <title>@ViewBag.Title  Employees Account</title>
+    @Styles.Render("~/Content/bootstrap.css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            @Html.ActionLink("Employee Account", "Index", "Employees", new { area = "" }, new { @class = "navbar-brand" })
+    <nav class="navbar navbar-expand-lg Pik-bg">
+        <div class="container-fluid">
+            @Html.ActionLink("P!K P!K", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav mr-auto">
                     <li class="nav-item">@Html.ActionLink("Home", "Index", "Employees", null, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Todays Requests", "Index", "Employees", null, new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Employess Account", "Index", "Employees", null, new { @class = "nav-link" })</li>
+
+
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </nav>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year</p>
-        </footer>
-    </div>
+
+
+
+    @RenderBody()
+
+    <!--- Start Contact Section -->
+    <div id="contact" class="offset">
+
+        <div class="container-fluid footer">
+            <div class="row">
+
+                <div class="col-md-12 text-center">
+                    <hr class="socket">
+                    <h3>P!K P!K.</h3>
+                    <hr class="socket">
+
+                    <p>(646) 416-3900<br>two7city@gmail.com</p>
+                    <a href="https://www.facebook.com/MooohammedRD"><i class="fab fa-facebook-square"></i></a>
+                    <a href="https://www.linkedin.com/in/mohammed-reda-medhi/"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.behance.net/Mohamemdreda"><i class="fab fa-behance-square"></i></a>
+
+
+                    <p>&copy; MOH MEDIA </p>
+
+                </div>
+
+
+
+            </div>
+
+
+
+        </div> <!--- End Row -->
+    </div> <!--- End Container Footer -->
+
+
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-</body>
-</html>
+    <style>
+        body {
+            background-color: #F1F7ED;
+            color: #13293D;
+        }
 
+        .Pik-bg {
+            background-color: #13293D;
+        }
+
+        .navbar-brand,
+        .nav-link {
+            color: #F1F7ED;
+        }
+
+            .nav-link:hover {
+                color: #fee500;
+            }
+        /*///////////////////////////////////////////*/
+
+        /*============= CONTACT SECTION =============*/
+
+        .footer .row {
+            background-color: #4F7CAC;
+            padding: 1rem 2rem 3rem;
+            color: #F1F7ED;
+        }
+
+
+        .footer a {
+            color: #F1F7ED;
+        }
+
+        .footer svg.svg-inline--fa {
+            margin: 1.2rem .5rem 0 0;
+        }
+
+            .footer svg.svg-inline--fa:hover {
+                color: #4F7CAC !important;
+            }
+
+        .footer h3 {
+            text-transform: uppercase;
+            margin: 1.5rem 0;
+        }
+
+
+        hr.socket {
+            width: 100%;
+            border-top: .2rem solid #F1F7ED;
+        }
+    </style>
+</body>
+
+
+</html>
