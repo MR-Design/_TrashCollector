@@ -5,19 +5,45 @@
 }
 
 
-<h3>Welcome Back</h3>
-<div>
-    <hr />
-  
 
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
 
-    <div class="form-actions no-color">
-        <input type="submit" value="Confirme" class="btn btn-primary" />
 
-        @Html.ActionLink("Maybe Later", "Account", "Customers", null, htmlAttributes: new { @class = "btn btn-primary" })
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="container padding narrow text-center ">
+    <h3 class="narrow padding"> Hi,@Html.DisplayFor(model => model.FirstName)  @Html.DisplayFor(model => model.LastName) </h3>
+    <p class="lead"> Nice to see you back ! </p> <br />
+
+
+    <div class="row">
+        <div class="container-fluid text-center col-md-4 ">
+            <div class="form-actions no-color">
+                <input type="submit" value="Confirm" class="btn btn-outline-success " />
+
+                @Html.ActionLink("Maybe Later", "Account", "Customers", null, htmlAttributes: new { @class = "btn btn-outline-primary " })
+
+            </div>
+
+        </div>
 
     </div>
-    }
+
 </div>
+}
+<style>
+
+    .padding {
+        padding: 3rem 0;
+    }
+
+    .narrow {
+        width: 85%;
+        margin: 0 auto;
+        padding-top: 1rem;
+    }
+
+    .btn {
+        margin-bottom: 30%;
+    }
+</style>

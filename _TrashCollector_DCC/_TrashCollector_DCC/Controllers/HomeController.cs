@@ -12,7 +12,12 @@ namespace _TrashCollector_DCC.Controllers
         {
             if (User.IsInRole("Employee"))
             {
-               return RedirectToAction("Index", "Customers");
+               return RedirectToAction("Index", "Employees");
+            }
+
+            if (User.IsInRole("Customers"))
+            {
+                return RedirectToAction("Account", "Customers");
             }
             return View();
         }
