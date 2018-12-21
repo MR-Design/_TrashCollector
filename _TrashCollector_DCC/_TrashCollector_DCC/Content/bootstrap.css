@@ -9027,4 +9027,12 @@ a.text-dark:hover, a.text-dark:focus {
     border-color: #dee2e6;
   }
 }
+
+/* On screens that are 600px or less, set the background color to olive */
+@media screen and (max-width: 715px) {
+    body {
+        background-color: olive;
+    }
+}
 /*# sourceMappingURL=bootstrap.css.map */
+

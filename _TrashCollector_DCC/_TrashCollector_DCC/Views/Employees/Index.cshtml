@@ -45,70 +45,75 @@
 }
 
 <div class="container">
-    <table class="table margin-buttom margin-top">
-        <tr class="orange">
-            <th>
-                <h3 class="lead"> First Name </h3>
-            </th>
-            <th>
-                <h3 class="lead"> Last Name </h3>
-            </th>
-            <th>
-                <h3 class="lead"> Pickup Day </h3>
-            </th>
+    <div class="row">
+        <div class="col-12">
+            <table class="table margin-buttom margin-top container">
+                <tr class="orange">
+                    <th class="">
+                        <h3 class="lead"> First Name </h3>
+                    </th>
+                    <th class="">
+                        <h3 class="lead"> Last Name </h3>
+                    </th>
+                    <th class="extra-info">
+                        <h3 class="lead "> Pickup Day </h3>
+                    </th>
 
 
-            <th>
-                <h3 class="lead"> Zipe Code </h3>
+                    <th class="extra-info">
+                        <h3 class="lead"> Zipe Code </h3>
 
-            </th>
+                    </th>
 
-            <th>
-                <h3 class="lead"> Comment </h3>
-            </th>
+                    <th class="">
+                        <h3 class="lead"> Comment </h3>
+                    </th>
 
-
-
-
-
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model.customers)
-        {
-
-            <tr class="alert-warning">
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WeeklyPickUpDay)
-                </td>
+                    <th class="text-hide">
+                        <h3 class="lead"> info </h3>
+                    </th>
 
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Zip)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ExtraPick)
-                </td>
+                </tr>
+
+                @foreach (var item in Model.customers)
+                {
+
+                    <tr class="alert-warning">
+                        <td class="">
+                            @Html.DisplayFor(modelItem => item.FirstName)
+                        </td>
+                        <td class="">
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        </td>
+                        <td class="extra-info">
+                            @Html.DisplayFor(modelItem => item.WeeklyPickUpDay)
+                        </td>
+
+
+                        <td class="extra-info">
+                            @Html.DisplayFor(modelItem => item.Zip)
+                        </td>
+                        <td class="">
+                            @Html.DisplayFor(modelItem => item.ExtraPick)
+                        </td>
 
 
 
-                <td>
-                    @Html.ActionLink("More Info", "Charge", "Employees", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-outline-warning" })
+                        <td>
+                            @Html.ActionLink("More Info", "Charge", "Employees", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-outline-warning" })
 
+                        </td>
 
-                </td>
+                    </tr>
 
-            </tr>
+                }
 
-        }
+            </table>
 
-    </table>
+        </div>
+    </div>
+   
 </div>
 
 <style>
@@ -130,5 +135,21 @@
         }
     .margin-top {
         margin-top: 7.5%;
+    }
+
+    @@media screen and (max-width: 993px) {
+        body {
+            font-size: .8rem;
+        }
+        .lead {
+            font-size: .8rem;
+        }
+        .btn {
+            font-size: .8rem;
+        }
+        .extra-info{
+            display:none;
+        }
+   
     }
 </style>
