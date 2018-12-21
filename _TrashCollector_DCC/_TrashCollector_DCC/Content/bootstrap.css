@@ -4,7 +4,6 @@
  * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -60,14 +59,14 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 }
 
 body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #F1F7ED;
-    text-align: left;
-    background-color: #F1F7ED;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  text-align: left;
+  background-color: #fff;
 }
 
 [tabindex="-1"]:focus {
@@ -9029,34 +9028,3 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
-
-
-.home-inner {
-    background-image: url('https://www.eastpikeland.org/vertical/Sites/%7B3F7567AD-BA35-41A6-9117-FD7892D5A0DA%7D/uploads/Trashcan.png');
-    opacity: 0.5;
-    filter: alpha(opacity=50);
-}
-
-.caption {
-    width: 100%;
-    max-width: 100%;
-    position: absolute;
-    top: 40%;
-    z-index: 1;
-}
-
-    .caption h3 {
-        color: white;
-        font-size: 2.4rem;
-        text-transform: uppercase;
-        padding-bottom: 2rem;
-    }
-
-.btn {
-    border-width: medium;
-    border-radius: 0;
-    padding: .5rem 1.1rem;
-    font-size: .9rem;
-    text-transform: uppercase;
-}
-

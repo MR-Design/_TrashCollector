@@ -15,26 +15,35 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg Pik-bg">
+  
+    <!--- Navigation -->
+    <nav class="navbar navbar-expand-md Pik-bg">
         <div class="container-fluid">
-            @Html.ActionLink("P!K P!K", "Index","Home", new { area = "" }, new { @class = "navbar-brand" })
-            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+
+            <a class="navbar-brand" href="#">
+                <img src="#" alt="">
+                @Html.ActionLink("P!K P!K", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                <span class="custom-toggler-icon"><i class="fas fa-bars"></i></span>
             </button>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav mr-auto">
-                    <li class="nav-item">@Html.ActionLink("Home", "Index", "Employees", null, new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Employess Account", "Index", "Employees", null, new { @class = "nav-link" })</li>
 
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav active">
+                    <li class="nav-item ">@Html.ActionLink("Home", "Index", "Employees", null, new { @class = "nav-link" })</li>
+                </ul>
 
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item">
+                        @Html.Partial("_LoginPartial")
+                    </li>
 
                 </ul>
-                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </nav>
-
-
+    <!--- End Navigation -->
 
     @RenderBody()
 
@@ -80,6 +89,8 @@
             color: #13293D;
         }
 
+ /***************NAV*****************************/
+
         .Pik-bg {
             background-color: #13293D;
         }
@@ -90,12 +101,15 @@
         }
 
             .nav-link:hover {
-                color: #fee500;
+                color: #4F7CAC;
             }
-        /*///////////////////////////////////////////*/
 
+        .navbar-toggler {
+            cursor: pointer;
+            color: #F1F7ED;
+        }
+    
         /*============= CONTACT SECTION =============*/
-
         .footer .row {
             background-color: #4F7CAC;
             padding: 1rem 2rem 3rem;
@@ -124,6 +138,10 @@
         hr.socket {
             width: 100%;
             border-top: .2rem solid #F1F7ED;
+        }
+
+        .navbar-toggler {
+            border-color: antiquewhite;
         }
     </style>
 </body>
