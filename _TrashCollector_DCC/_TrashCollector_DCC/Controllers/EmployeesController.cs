@@ -63,12 +63,9 @@ namespace _TrashCollector_DCC.Controllers
                 customers = new List<Customer>(),
                 employee = new Employee(),
         
-
             };
-            var currentCustomer = User.Identity.GetUserId();
-            view.employee.UserId = currentCustomer;
-        
-            var employeeZip = db.Employees.Select(x => x.Zip).SingleOrDefault();
+            var currentEmployee = User.Identity.GetUserId();
+            var employeeZip = db.Employees.Where(e=>e.UserId == currentEmployee).Select(x => x.Zip).FirstOrDefault();
             var Today = DateTime.Now.DayOfWeek.ToString();
 
             view.customers = db.Customers.Where(x => x.Zip == employeeZip && x.WeeklyPickUpDay == Today).ToList();
@@ -76,7 +73,6 @@ namespace _TrashCollector_DCC.Controllers
             {
                 var thisDay = view.customer.ExtraPickUp.Value.DayOfWeek.ToString();
                 view.customers = db.Customers.Where(x => x.Zip == employeeZip && x.WeeklyPickUpDay == thisDay).ToList();
-
             }
 
             return View(view);
@@ -93,10 +89,12 @@ namespace _TrashCollector_DCC.Controllers
                 employee = new Employee()
 
             };
-            var employeeZip = db.Employees.Select(x => x.Zip).SingleOrDefault();
 
             if (!String.IsNullOrEmpty(search))
             {
+                var currentEmployee = User.Identity.GetUserId();
+                var employeeZip = db.Employees.Where(e => e.UserId == currentEmployee).Select(x => x.Zip).FirstOrDefault();
+                view.customers = db.Customers.Where(x => x.Zip == employeeZip).ToList();
                 view.customers = db.Customers.Where(s => s.WeeklyPickUpDay.Contains(search) && s.Zip== employeeZip).ToList(); 
             }
 
